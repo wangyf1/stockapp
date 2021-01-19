@@ -1,8 +1,8 @@
 {
     "name": "minimal",
     "engines": {
-        "node": "*",
-        "npm": "*"
+        "node": "15.x",
+        "npm": "7.x"
     },
     "scripts": {
         "start": "http-server"
