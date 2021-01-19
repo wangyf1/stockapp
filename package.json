@@ -1,0 +1,15 @@
+{
+    "name": "minimal",
+    "engines": {
+        "node": "*",
+        "npm": "*"
+    },
+    "scripts": {
+        "start": "http-server"
+    },
+    "dependencies": {
+        "canvas": "^2.6.1",
+        "chart.js": "^2.9.4",
+        "http-server": "*"
+    }
+}

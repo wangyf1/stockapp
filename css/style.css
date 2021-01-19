@@ -1,0 +1,68 @@
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:gray;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 30px;
+}
+
+table.cvtable {
+  border: 3px solid #AAAAAA;
+  width: 100%;
+  height: 200px;
+  text-align: left;
+  border-collapse: collapse;
+}
+table.cvtable td, table.cvtable th {
+  border: 2px solid #AAAAAA;
+  padding: 5px 4px;
+}
+table.cvtable tbody td {
+  font-size: 20px;
+  color: white;
+}
+
+.my_container {
+  background-color:gray;
+  border: 3px gray solid;
+  border-radius: 25px;
+  margin: 100px;
+  padding: 20px;
+}
+
+.container_title{
+  font-size: 30px;
+  color: white;
+}
+
+.container_text{
+  font-size: 20px;
+  color: white;
+  padding: 10px;
+}
+
+img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.hover{
+  background-color:rgba(100, 74, 14, 0.856);
+}
+
+@media only screen and (max-width: 600px) {
+  .my_container {
+    margin: 20px;
+  }
+}
