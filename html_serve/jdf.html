@@ -5,57 +5,97 @@
     <title>
         京东方
     </title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 </head>
 
 <body>
-    <div><canvas id="myChart" width="700" height="700"></canvas></div>
+
+    <a href="/index.html" class="previous">&laquo; 返回</a>
+    <!-- Tab links -->
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'basicInfo')" id="defaultOpen">公司信息</button>
+        <button class="tablinks" onclick="openCity(event, 'charts')">公司图表</button>
+        <button class="tablinks" onclick="openCity(event, 'managements')">公司管理</button>
+        <button class="tablinks" onclick="openCity(event, 'stockNews')">股票新闻</button>
+        <button class="tablinks" onclick="openCity(event, 'links')">公司链接</button>
+    </div>
+
+    <!-- Tab content -->
+    <div id="basicInfo" class="tabcontent">
+        <h3></h3>
+        <p>这家公司拥有潜力，但是在购买这家公司股票之前，一定要看清它所存在的一些问题：从他历史营收增长看起来，我们相信营收还会持续现在的稳定增长，但是这家公司利润和现金流在过去二十年始终不是很理想，它的利润大部分来自于政府补助，除开17年行情大幅拉伸以外，只有在2020年的三季度实现了营收，利润，扣非净利润的大幅增长。这种势头是否能持续下去，是一个未知数。现在中国政府大力支持国家高端产业链的发展，所以我们认为政府补助应该不会在短期内有太大的变化，即使扣非净利润看似不高，因此不必担心现金流会出现任何的问题。
+            问题在于，管理层是否真的有能力和远见，将过去二十年中投入的大量资金，转换为真正的利润。如果刨去政府补助，他们的ROE（净资产回报率）几乎处于全行业垫底的地位。这让我们不得不质疑
+            管理层的能力。它们并非超高速发展的网络科技公司，而是一家硬件企业，这种长时间不盈利的状态，或许是为了未来行情回暖利润爆发前的准备，亦或是公司管理层无能的表现，我们比较倾向于它属于后者。</p>
+    </div>
+
+    <div id="charts" class="tabcontent">
+        <div><canvas id="myChart" width="700" height="700"></canvas></div>
+    </div>
+
+    <div id="managements" class="tabcontent">
+        <h3>总裁：刘强东</h3>
+    </div>
+
+    <div id="stockNews" class="tabcontent">
+        <h3>买到就是赚到</h3>
+    </div>
+
+    <div id="links" class="tabcontent">
+        <h3><u><a href='https://www.boe.com/'>京东方</a></u></h3>
+    </div>
+    
 </body>
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+    </script>
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['2019-12-31', '2018-12-31', '2017-12-31', 
-          '2016-12-31', '2015-12-31'],
-          datasets: [
-            {
-                label: "中国",
-                backgroundColor:  'rgba(0, 102, 255, 1)',
-                borderColor: 'rgba(0, 102, 255,1)',
-                data: [594, 429, 440, 367, 210]
-            },
-            {
-                label: "亚洲其他",
-                backgroundColor: 'rgba(75, 192, 192, 1)',
-                borderColor: 'rgba(75, 192, 192, 1)',
-                data: [450, 442, 442, 286, 213]
-            },
-             {
-                 label: "欧洲",
-                 backgroundColor: 'rgba(255, 206, 86, 1)',
-                 borderColor: 'rgba(255, 206, 86, 1)',
-                 data: [45, 35, 22, 16, 34]
-             },
-             {
-                 label: "美洲",
-                 backgroundColor: 'rgba(255, 51, 0, 1)',
-                 borderColor: 'rgba(255, 51, 0, 1)',
-                 data: [70, 63, 32, 18, 34]
-             }
+            labels: ['2019-12-31', '2018-12-31', '2017-12-31',
+                '2016-12-31', '2015-12-31'],
+            datasets: [
+                {
+                    label: "中国",
+                    backgroundColor: 'rgba(0, 102, 255, 1)',
+                    borderColor: 'rgba(0, 102, 255,1)',
+                    data: [594, 429, 440, 367, 210]
+                },
+                {
+                    label: "亚洲其他",
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    data: [450, 442, 442, 286, 213]
+                },
+                {
+                    label: "欧洲",
+                    backgroundColor: 'rgba(255, 206, 86, 1)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    data: [45, 35, 22, 16, 34]
+                },
+                {
+                    label: "美洲",
+                    backgroundColor: 'rgba(255, 51, 0, 1)',
+                    borderColor: 'rgba(255, 51, 0, 1)',
+                    data: [70, 63, 32, 18, 34]
+                }
 
-          ]
-      },
-        options: {
-          title: {
-            display: true,
-            text: '年营业收入（按地区划分）'
+            ]
         },
-          responsive: false,
+        options: {
+            title: {
+                display: true,
+                text: '年营业收入（按地区划分）'
+            },
+            responsive: false,
             scales: {
-              xAxes: [{
-                stacked: true
-            }],
+                xAxes: [{
+                    stacked: true
+                }],
                 yAxes: [{
                     ticks: {
                         beginAtZero: true
