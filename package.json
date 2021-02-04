@@ -5,11 +5,12 @@
         "npm": "7.4"
     },
     "scripts": {
-        "start": "http-server"
+        "start": "node index.js"
     },
     "dependencies": {
         "canvas": "^2.6.1",
         "chart.js": "^2.9.4",
+        "express": "^4.17.1",
         "http-server": "*",
         "node-pre-gyp": "^0.17.0"
     }
