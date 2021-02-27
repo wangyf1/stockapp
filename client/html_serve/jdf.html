@@ -32,6 +32,7 @@
 
     <div id="charts" class="tabcontent">
         <div><canvas id="myChart" width="700" height="700"></canvas></div>
+        <div><canvas id="myChart2" width="700" height="700"></canvas></div>
     </div>
 
     <div id="managements" class="tabcontent">
@@ -45,12 +46,12 @@
     <div id="links" class="tabcontent">
         <h3><u><a href='https://www.boe.com/'>京东方</a></u></h3>
     </div>
-    
+
 </body>
 <script>
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
-    </script>
+</script>
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
@@ -90,6 +91,47 @@
             title: {
                 display: true,
                 text: '年营业收入（按地区划分）'
+            },
+            responsive: false,
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }]
+            }
+        }
+    });
+</script>
+
+<script>
+    // Get the element with id="defaultOpen" and click on it
+    document.getElementById("defaultOpen").click();
+</script>
+<script>
+    var ctx = document.getElementById('myChart2');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['2020-09-30','2020-06-30',	'2020 - 03 - 31'],
+            datasets: [
+                {
+                    label:"净利润",
+                    backgroundColor: 'rgba(0, 102, 255, 1)',
+                    borderColor: 'rgba(0, 102, 255,1)',
+                    data: [13.4, 5.69, 5.67]
+                },
+                
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: '净利润'
             },
             responsive: false,
             scales: {
