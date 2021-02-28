@@ -49,10 +49,12 @@
     </div>
 
 </body>
+
 <script>
     // Get the element with id="defaultOpen" and click on it
     document.getElementById("defaultOpen").click();
 </script>
+
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
@@ -109,22 +111,22 @@
     });
 </script>
 
-<script>
-    // Get the element with id="defaultOpen" and click on it
-    document.getElementById("defaultOpen").click();
-</script>
+<!--第二个图表，严依真在瞎尝试当中-->
+
 <script>
     var ctx = document.getElementById('myChart2');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['2020-09-30','2020-06-30',	'2020 - 03 - 31'],
+            labels: ['2020-09-30',	'2020-06-30',	'2020-03-31',	'2019-12-31',	'2019-09-30',	'2019-06-30',	'2019-03-31',	'2018-12-31',	'2018-09-30',	'2018-06-30',	'2018-03-31',	'2017-12-31',	'2017-09-30',	'2017-06-30',	'2017-03-31',	'2016-12-31',	'2016-09-30',	'2016-06-30',	'2016-03-31',	'2015-12-31',	'2015-09-30',	'2015-06-30',	'2015-03-31',	'2014-12-31',	'2014-09-30',	'2014-06-30',	'2014-03-31',	'2013-12-31',	'2013-09-30',
+],
             datasets: [
                 {
                     label:"净利润",
                     backgroundColor: 'rgba(0, 102, 255, 1)',
                     borderColor: 'rgba(0, 102, 255,1)',
-                    data: [13.4, 5.69, 5.67]
+                    data: [8.171097, 	7.999402, 	4.081258, 	0.40435, 	4.84981, 	13.132606, 	7.790884, 	9.785495, 	9.037225, 	8.551017, 	7.308373, 	7.582907, 	8.722593, 	5.860251, 	4.478199, 	0.640195, 	9.324005, 	3.451294, 	2.605766, 	5.024275, 	4.431805, 	8.672908, 	7.541022, 	9.639331, 	7.455279, 	7.388123, 	7.349327, 	8.440828, 	4.925022, 
+]
                 },
                 
             ]
@@ -149,6 +151,8 @@
         }
     });
 </script>
+
+
 
 <script>
     var ctx = document.getElementById('myChart3');
