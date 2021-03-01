@@ -62,6 +62,7 @@ body {
 [tabindex="-1"]:focus {
   outline: 0 !important; }
 
+
 hr {
   -webkit-box-sizing: content-box;
   box-sizing: content-box;
@@ -71,6 +72,10 @@ hr {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
+
+canvas {
+    margin:auto; 
+    padding-bottom: 50px;}
 
 p {
   margin-top: 0;
