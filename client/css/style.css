@@ -73,9 +73,40 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
 
+/* yanyizhen */
 canvas {
     margin:auto; 
     padding-bottom: 50px;}
+
+#navbar {
+  position: fixed;
+  min-width: 290px;
+  top: 100px;
+  right: 0px;
+  width: 300px;
+  height: 100%;
+  border-color: rgba(15, 66, 66, 0.4);}
+
+#navbar ul {
+  height: 88%;
+  padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;}
+    
+#navbar li {
+  color: #4d4e53;
+  list-style: none;
+  position: relative;
+  width: 100%; }
+    
+#navbar a {
+  display: block;
+  padding: 10px 30px;
+  color: #4d4e53;
+  text-decoration: none;
+  cursor: pointer;  }
+
+    /* yanyizhen */
 
 p {
   margin-top: 0;
