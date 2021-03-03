@@ -74,9 +74,31 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem; }
 
 /* yanyizhen */
+
+.fixed-1 {
+  position: fixed; 
+  top: 1rem;
+}
+.fixed-2 {
+  position: fixed; 
+  top: 6rem;
+}
+.fixed-3 {
+  position: fixed; 
+  top: 22rem;
+}
+.fixed-4 {
+  position: fixed; 
+  top: 26rem;
+  font-size: 0.8rem;
+}
+
 canvas {
     margin:auto; 
-    padding-bottom: 50px;}
+    padding-bottom: 50px;
+    padding-top: 50px;
+    padding-right: 220px;
+  }
 
 #navbar {
   position: fixed;
@@ -106,7 +128,7 @@ canvas {
   text-decoration: none;
   cursor: pointer;  }
 
-    /* yanyizhen */
+/* yanyizhen */
 
 p {
   margin-top: 0;
@@ -2107,6 +2129,13 @@ fieldset:disabled a.btn {
   pointer-events: none; }
 
 .btn-primary {
+
+  /**yanyizhen**/
+  margin-top: 50px;
+  position: fixed;
+  margin-left: -40px;
+  /**yanyizhen**/
+
   color: #fff;
   background-color: #007bff;
   border-color: #007bff; }
@@ -8378,6 +8407,8 @@ a[data-toggle="collapse"] {
 
     /* Style the tab */
 .tab {
+  position: fixed;
+  width: 100%;
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
@@ -8407,7 +8438,7 @@ a[data-toggle="collapse"] {
 /* Style the tab content */
 .tabcontent {
   display: none;
-  padding: 6px 12px;
+  padding: 100px 12px;
   border: 1px solid #ccc;
   border-top: none;
 }
