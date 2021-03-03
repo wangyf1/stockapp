@@ -22,21 +22,6 @@
         <button class="tablinks" onclick="openCity(event, 'links')">公司链接</button>
     </div>
 
-    <nav id="navbar">
-        <ul>
-          <li><a class="nav-link" href="#profit">净利润</a></li>
-          <li><a class="nav-link" href="#revenue">营收</a></li>
-          <li><a class="nav-link" href="#chart4">净利润 vs. 扣非净利润</a></li>
-          <li><a class="nav-link" href="#chart5">营收 vs. 毛利 vs. 营业利润</a></li>
-          <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
-          <li><a class="nav-link" href="#FCF">自由现金流</a></li>
-          <li><a class="nav-link" href="#balance">资产负债</a></li>
-          <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
-          <li><a class="nav-link" href="#balance_detailed">资产负债分解</a></li>
-          <li><a class="nav-link" href="#pie">资产负债分解比较</a></li>
-        </ul>
-      </nav>
-
     <!-- Tab content -->
     <div id="basicInfo" class="tabcontent">
         <h3></h3>
@@ -44,6 +29,20 @@
     </div>
 
     <div id="charts" class="tabcontent">
+        <nav id="navbar">
+            <ul>
+              <li><a class="nav-link" href="#profit">净利润</a></li>
+              <li><a class="nav-link" href="#revenue">营收</a></li>
+              <li><a class="nav-link" href="#chart4">净利润 vs. 扣非净利润</a></li>
+              <li><a class="nav-link" href="#chart5">营收 vs. 毛利 vs. 营业利润</a></li>
+              <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
+              <li><a class="nav-link" href="#FCF">自由现金流</a></li>
+              <li><a class="nav-link" href="#balance">资产负债</a></li>
+              <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
+              <li><a class="nav-link" href="#balance_detailed">资产负债分解</a></li>
+              <li><a class="nav-link" href="#pie">资产负债分解比较</a></li>
+            </ul>
+        </nav>
         <div><canvas id="profit" width="800" height="700"></canvas></div>
         <div><canvas id="revenue" width="800" height="700"></canvas></div>
         <div><canvas id="chart4" width="800" height="700"></canvas></div>
