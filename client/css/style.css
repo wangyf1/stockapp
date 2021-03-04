@@ -41,6 +41,7 @@
   box-sizing: border-box; }
 
 html {
+  scroll-behavior: smooth;
   font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
@@ -74,6 +75,10 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0.5rem; }
 
 /* yanyizhen */
+
+.smooth {
+  scroll-behavior: smooth;
+}
 
 .fixed-1 {
   position: fixed; 
