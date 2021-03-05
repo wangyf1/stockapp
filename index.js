@@ -13,12 +13,30 @@ const express = require('express')
 const path = require('path')
 const app = express()
 const port = 8080
-app.use( express.static( __dirname + '/client' ));
+app.use(express.static(__dirname + '/client'));
 
 app.get('/', (req, res) => {
-  res.sendFile( path.join( __dirname, 'client', 'index.html' ));
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
 })
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
+var bodyParser = require('body-parser');
+
+app.use(bodyParser());
+
+const MongoClient = require('mongodb').MongoClient;
+const uri = "mongodb+srv://niubi:123@cluster0.lfrkz.mongodb.net/niubi?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+client.connect(err => {
+  const collection = client.db("niubi").collection("email");
+  // perform actions on the collection object
+  app.post('/post-email', function (req, res) {
+    
+    collection.insertOne(req.body);
+    return res.redirect('/');
+    //res.send('Data received:\n' + JSON.stringify(req.body));
+});
+  //client.close();
+});
