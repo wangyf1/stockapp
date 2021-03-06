@@ -32,7 +32,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology:
 client.connect(err => {
   const collection = client.db("niubi").collection("email");
   // perform actions on the collection object
-  app.post('/post-email', function (req, res) {
+  app.post('/index.js', function (req, res) {
     
     collection.insertOne(req.body);
     return res.redirect('/');
