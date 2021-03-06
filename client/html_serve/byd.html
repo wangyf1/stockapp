@@ -47,7 +47,8 @@
 
                 <div class="mb-5">
 					<h3 class="h6">Subscribe for newsletter</h3>
-					<form method="POST" action="/post-email" class="colorlib-subscribe-form">
+                    <form name='post-email' method="POST" action="/post-email" class="colorlib-subscribe-form" >
+						<input type="hidden" name="form-name" value="post-email"/>
 						<div class="form-group d-flex">
 							<div class="icon"><span class="icon-paper-plane"></span></div>
 							<input type="text" class="form-control" name="email" id="email" placeholder="Enter Email Address">
