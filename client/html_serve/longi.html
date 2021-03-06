@@ -46,15 +46,19 @@
                 </ul>
 
                 <div class="mb-5">
-                    <h3 class="h6">Subscribe for newsletter</h3>
-                    <form action="#" class="colorlib-subscribe-form">
-                        <div class="form-group d-flex">
-                            <div class="icon"><span class="icon-paper-plane"></span></div>
-                            <input type="text" class="form-control" placeholder="Enter Email Address">
-                        </div>
-                    </form>
-                </div>
-
+					<h3 class="h6">Subscribe for newsletter</h3>
+					<form method="POST" action="/post-email" class="colorlib-subscribe-form">
+						<div class="form-group d-flex">
+							<div class="icon"><span class="icon-paper-plane"></span></div>
+							<input type="text" class="form-control" name="email" id="email" placeholder="Enter Email Address">
+						
+						</div>
+						<div class="form-group d-flex">
+						
+							<input type="submit" value="Submit">
+						</div>
+					</form>
+				</div>
                 <div class="footer">
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->

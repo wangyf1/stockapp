@@ -35,7 +35,7 @@ client.connect(err => {
   app.post('/post-email', function (req, res) {
     
     collection.insertOne(req.body);
-    return res.redirect('/');
+    return res.redirect(req.get('referer'));
     //res.send('Data received:\n' + JSON.stringify(req.body));
 });
   //client.close();
