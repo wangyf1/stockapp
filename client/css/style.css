@@ -76,6 +76,12 @@ h1, h2, h3, h4, h5, h6 {
 
 /* yanyizhen */
 
+@media (max-width: 1311px) {
+  #sidebar-content {
+    margin-left: -250px; 
+  } 
+}
+
 .smooth {
   scroll-behavior: smooth;
 }
@@ -8315,7 +8321,7 @@ h1, h2, h3, h4, h5,
     #sidebar ul li.active > a {
       background: transparent;
       color: #fff; }
-  @media (max-width: 991.98px) {
+  @media (max-width: 1311px) {
     #sidebar {
       margin-left: -250px; }
       #sidebar.active {
