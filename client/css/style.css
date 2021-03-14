@@ -96,6 +96,8 @@ h1, h2, h3, h4, h5, h6 {
   background-color: white;
   box-shadow: 1px 1px black;
   display: none;
+  max-width: 500px;
+  padding: 5px;
 }
 
 .moving-div-active{
