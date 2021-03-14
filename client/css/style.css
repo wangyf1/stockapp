@@ -74,9 +74,9 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0.5rem; }
 
-/* yanyizhen */
+/* Yizhen - This is for hiding sidebar and navbar content */
 
-@media (max-width: 1311px) {
+@media (max-width: 998px) {
   #sidebar-content {
     margin-left: -250px; 
   } 
@@ -87,6 +87,24 @@ h1, h2, h3, h4, h5, h6 {
     display:none; 
   } 
 }
+
+/*Yizhen - This is for adding floating element*/
+
+.moving-div {
+  position: absolute;
+  border: solid thin lightgrey;
+  background-color: white;
+  box-shadow: 1px 1px black;
+  display: none;
+}
+
+.moving-div-active{
+  display: block;
+}
+
+
+
+/*Yizhen - This is for smooth scrolling thru navbar element*/
 
 .smooth {
   scroll-behavior: smooth;
@@ -8326,7 +8344,9 @@ h1, h2, h3, h4, h5,
     #sidebar ul li.active > a {
       background: transparent;
       color: #fff; }
-  @media (max-width: 1311px) {
+
+/* yanyizhen : adjust sidebar hidden width*/
+  @media (max-width: 998px) {
     #sidebar {
       margin-left: -250px; }
       #sidebar.active {
