@@ -49,4 +49,12 @@ $(document).ready(function(){
         })
     })
 
+    //Import Excel data trial #1
+    alasql('select * from xlsx("excel/maotai/bsf.xlsx.xlsm",{headers:true, sheetid:"keyData", range:"B2:AD3"})',
+    [],function(data) {
+        console.log(data);
+    });
+
 });
+
+

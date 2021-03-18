@@ -94,10 +94,11 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
   border: solid thin lightgrey;
   background-color: white;
-  box-shadow: 1px 1px black;
+  box-shadow: 2px 2px 15px rgba(0,0,0,0.3);
   display: none;
-  max-width: 500px;
+  max-width: 400px;
   padding: 5px;
+  font-size: 13px;
 }
 
 .moving-div-active{
