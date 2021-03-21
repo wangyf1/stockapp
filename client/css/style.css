@@ -88,8 +88,22 @@ h1, h2, h3, h4, h5, h6 {
   } 
 }
 
-/*Yizhen - This is for adding floating element*/
 
+.thin-border {
+  border: 1px solid #969ea5 !important;  
+  border-radius: .25rem !important;
+  width:30% !important;
+}
+
+.focusedInput:focus{
+  border-color: rgba(14, 100, 165, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  -moz-box-shadow: 0 0 12px rgba(8, 76, 128, 0.6);
+  box-shadow: 0 0 12px rgba(6, 72, 122, 0.6) !important;
+}
+
+/*Yizhen - This is for adding floating element*/
 .moving-div {
   position: absolute;
   border: solid thin lightgrey;

@@ -7,6 +7,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 
   </head>
@@ -86,21 +87,26 @@
 			<h2><a href="html_serve/longi.html"><u>隆基股份</u></a></h2>
 			<h2><a href="html_serve/byd.html"><u>比亚迪</u></a></h2>
 			<h2><a href="html_serve/maotai.html"><u>贵州茅台</u></a></h2><br><br>
-			<h4>没有找到想看的公司？请留下您的邮箱和感兴趣的公司，更新之后我们会通知您</h4>
+
 			<form name='post-email' method="POST" action="/post-email" class="colorlib-subscribe-form" data-netlify="true">
-				<div class="form-group d-flex">
+			<h5>没有找到想看的公司？请留下您的邮箱和感兴趣的公司，更新之后我们会通知您</h5>
+				<div class="form-group">
+					<label for="exampleInputEmail1">邮箱地址</label>
 					<div class="icon"><span class="icon-paper-plane"></span></div>
-					<input type="email" class="form-control" name="email" id="email" placeholder="请留下您的邮箱" required>
+					<input type="email" class="form-control focusedInput thin-border" name="email" id="email" placeholder="请留下您的邮箱" required aria-describedby="emailHelp">
 				</div>
-				<div class="form-group d-flex">
+				<div class="form-group">
+					<label for="exampleInputEmail1">感兴趣的公司名称</label>
 					<div class="icon"><span class="icon-paper-plane"></span></div>
-					<input type="text" class="form-control" name="company" id="company" placeholder="请留下您想看的公司" required>
+					<input type="text" class="form-control focusedInput thin-border" name="company" id="company" placeholder="请留下您想看的公司" required>
 				</div>
 				<div class="form-group d-flex">
 				
 					<input type="submit" value="Submit">
 				</div>
 			</form>
+
+
 		</div>
 
 	</div>
@@ -109,7 +115,7 @@
 	<script src="js/xlsx.core.min.js"></script>	
 	<script src="js/jquery.min.js"></script>
     <script src="js/popper.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
     <script src="js/main.js"></script>
 	<script src="js/yyz.js"></script>
 
