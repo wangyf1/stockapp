@@ -1,5 +1,5 @@
+//hovering function
 $(document).ready(function(){
-
     var $mouseX = 0, $mouseY = 0;
     var $xp = 0, $yp = 0;
     
@@ -49,11 +49,13 @@ $(document).ready(function(){
         })
     })
 
-    //Import Excel data trial #1
-    alasql('select * from xlsx("excel/maotai/bsf.xlsx.xlsm",{headers:true, sheetid:"keyData", range:"B2:AD3"})',
-    [],function(data) {
-        console.log(data);
-    });
+    // 净利润解释
+    $('a:contains("净利润")').hover(function(){
+        $('#profitDescription').addClass('moving-div-active')
+        $(this).on('mouseleave',function(){
+        $('#profitDescription').removeClass('moving-div-active')
+        })
+    })
 
 });
 

@@ -150,6 +150,7 @@ canvas {
     margin:auto; 
     padding-top: 100px;
     padding-right: 220px;
+    z-index:-1;
   }
 
 #navbar {
@@ -181,6 +182,19 @@ canvas {
   cursor: pointer;  }
 
 /* yanyizhen */
+
+.explanation{
+  display:block;
+  min-width: 1062px;
+  text-align: center;
+  padding-right: 220px;
+  width: 50%;
+  margin: auto;
+  margin-bottom: -130px;
+  z-index: 1;
+  padding-left: 230px;
+  }
+
 
 p {
   margin-top: 0;
