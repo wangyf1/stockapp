@@ -50,12 +50,14 @@ $(document).ready(function(){
     })
 
     // 净利润解释
+    /*
     $('a:contains("净利润")').hover(function(){
         $('#profitDescription').addClass('moving-div-active')
         $(this).on('mouseleave',function(){
         $('#profitDescription').removeClass('moving-div-active')
         })
     })
+    */
 
 });
 

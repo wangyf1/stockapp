@@ -2,7 +2,7 @@
 document.getElementById("defaultOpen").click();
 
 //Import Excel data
-alasql.promise('select * from xlsx("../excel/maotai/exportedExcel.xlsx",{range:"B2:AD32"})')
+alasql.promise('select * from xlsx("../excel/yonghui/exportedExcel.xlsx",{range:"B2:AD32"})')
     .then(function(data){
         console.log(data);
 
@@ -56,7 +56,6 @@ alasql.promise('select * from xlsx("../excel/maotai/exportedExcel.xlsx",{range:"
         Chart.defaults.global.defaultFontSize = 15;
 
 //all charts
-
         //Chart: Profit
         var ctx = document.getElementById('profit');
         var myChart = new Chart(ctx, {
