@@ -64,6 +64,9 @@ app.get('/longi', (req, res) => {
 app.get('/maotai', (req, res) => {
   res.render('maotai');
 });
+app.get('/pingan', (req, res) => {
+  res.render('pingan');
+});
 app.get('/terms', (req, res) => {
   res.render('terms');
 });

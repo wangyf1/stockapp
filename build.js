@@ -75,6 +75,11 @@ ejs2html({
 });
 
 ejs2html({
+  path: `${__dirname}/views/pingan.ejs`,
+  outPath: `${__dirname}/public/pingan.html`
+});
+
+ejs2html({
   path: `${__dirname}/views/sidebar.ejs`,
   outPath: `${__dirname}/public/sidebar.html`
 });
