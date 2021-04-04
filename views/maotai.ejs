@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        贵州茅台
+    </title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+
+            <div class="custom-menu">
+                <button type="button" id="sidebarCollapse" class="btn btn-primary">
+                            <i class="fa fa-bars"></i>
+                        <span class="sr-only">Toggle Menu</span>
+                        </button>
+                    </div>
+
+            <div class="p-4 pt-5">
+
+                    <h1><a href="/" class="logo">牛逼股票网</a></h1>
+
+                <ul class="list-unstyled components mb-5">
+                    <!-- <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li><a href="#">Home 1</a></li>
+                        <li><a href="#">Home 2</a></li>
+                        <li><a href="#">Home 3</a></li>
+                        </ul>
+                                                </li>
+                                        -->
+                    <li><a href="about">About</a></li>
+                    <li><a href="knowledge">Knowledge</a></li>
+                    <li><a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                        <li><a href="#">Page 1</a></li>
+                        <li><a href="#">Page 2</a></li>
+                        <li><a href="#">Page 3</a></li>
+                    </ul>
+                    </li>
+                    <li><a href="video">视频</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="terms">Terms/Privacy</a></li>
+                        </ul>
+
+                <div class="mb-5">
+                    <h3 class="h6">Subscribe for newsletter</h3>
+                    <form name='post-email' method="POST" action="/post-email" class="colorlib-subscribe-form" >
+                        <input type="hidden" name="form-name" value="post-email"/>
+                        <div class="form-group d-flex">
+                            <div class="icon"><span class="icon-paper-plane"></span></div>
+                            <input type="text" class="form-control" name="email" id="email" placeholder="Enter Email Address">
+                        
+                        </div>
+                        <div class="form-group d-flex">
+                        
+                            <input type="submit" value="Submit">
+                        </div>
+                    </form>
+                </div>
+
+                <div class="footer">
+                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib.com</a>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                </div>
+
+                    </div>
+            </nav>
+
+
+        <!-- Page Content  -->
+
+        <!--term explanation-->
+        <div id='profitDescription' class="moving-div">profit = revenue - Expense</div>
+
+        <div id="content">
+            <!-- Tab links -->
+            <div class="tab">
+                <a href="../index.html"><button class="tablinks" >返回主页</button></a>
+                <button class="tablinks" onclick="openCity(event, 'basicInfo')">公司信息</button>
+                <button class="tablinks" onclick="openCity(event, 'charts')" id="defaultOpen">公司图表</button>
+                <button class="tablinks" onclick="openCity(event, 'managements')">公司管理</button>
+                <button class="tablinks" onclick="openCity(event, 'stockNews')">股票新闻</button>
+                <button class="tablinks" onclick="openCity(event, 'links')">公司链接</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="basicInfo" class="tabcontent">
+                <h3></h3>
+                <p>贵州茅台在A股市值第一，让我们看看为啥这么牛逼</p>
+            </div>
+
+            <div id="charts" class="tabcontent">
+                <nav id="navbar">
+                    <ul>
+                        <li><a class="nav-link" href="#profit">净利润</a></li>
+                        <li><a class="nav-link" href="#revenue">营收</a></li>
+                        <li><a class="nav-link" href="#profitWithoutEx">净利润 vs. 扣非净利润</a></li>
+                        <li><a class="nav-link" href="#gross">营收 vs. 毛利 vs. 营业利润</a></li>
+                        <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
+                        <li><a class="nav-link" href="#FCF">自由现金流</a></li>
+                        <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
+                    </ul>
+                </nav>
+                <div>                        
+                    <div class="explanation" id='profitHover'><u><a href="">净利润如何计算？</a></u></div>
+                    <canvas id="profit" width="800" height="700"></canvas>
+                </div>
+                <div>
+                    <canvas id="revenue" width="800" height="700"></canvas>
+                </div>
+                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
+                <div><canvas id="gross" width="800" height="700"></canvas></div>
+                <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
+                <div><canvas id="FCF" width="800" height="700"></canvas></div>
+                <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
+                <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
+
+
+
+            </div>
+
+            <div id="managements" class="tabcontent">
+                <h3>总裁：茅大台</h3>
+            </div>
+
+            <div id="stockNews" class="tabcontent">
+                <h3>买到就是赚到</h3>
+            </div>
+
+            <div id="links" class="tabcontent">
+                <h3><u><a href='https://www.maotaichina.com'>茅台</a></u></h3>
+            </div>
+        </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> <!--import chart.js-->
+    <script src="/js/alasql.min.js"></script>       <!--import alasql.js-->
+	<script src="/js/xlsx.core.min.js"></script>    <!--import xlsx.core.js-->	
+    <script src="/js/popper.js"></script>            <!--import popper.js-->
+    <script src="/js/jquery.min.js"></script>       <!--import jQuery-->
+    <script src="/js/bootstrap.min.js"></script>     <!--import bootstrap.js-->
+    <script src="/js/main.js"></script>             <!--import main.js-->
+    <script src="/js/maotai.js"></script>           <!--import maotai.js-->
+    <script src="/js/yyz.js"></script>           <!--import maotai.js-->
+
+
+</body>
+
+
+
+</html>
