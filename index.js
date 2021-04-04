@@ -52,6 +52,9 @@ app.get('/about', (req, res) => {
 app.get('/byd', (req, res) => {
   res.render('byd');
 });
+app.get('/contact', (req, res) => {
+  res.render('contact');
+});
 app.get('/jdf', (req, res) => {
   res.render('jdf');
 });
@@ -73,6 +76,7 @@ app.get('/video', (req, res) => {
 app.get('/yonghui', (req, res) => {
   res.render('yonghui');
 });
+
 
 var bodyParser = require('body-parser');
 
