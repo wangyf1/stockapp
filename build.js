@@ -68,3 +68,8 @@ ejs2html({
   path: `${__dirname}/views/yonghui.ejs`,
   outPath: `${__dirname}/public/yonghui.html`
 });
+
+ejs2html({
+  path: `${__dirname}/views/sidebar.ejs`,
+  outPath: `${__dirname}/public/sidebar.html`
+});

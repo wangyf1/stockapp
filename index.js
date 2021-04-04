@@ -81,7 +81,7 @@ app.post('/updatestate', (req, res) => {
   const newValue = updateDatabase(res.body);
   res.json(newValue);
 });
-module.exports.handler = serverless(app);
+
 
 app.use(bodyParser());
 
@@ -99,3 +99,5 @@ client.connect(err => {
 });
   //client.close();
 });
+
+module.exports.handler = serverless(app);
