@@ -65,6 +65,11 @@ ejs2html({
 });
 
 ejs2html({
+  path: `${__dirname}/views/video.ejs`,
+  outPath: `${__dirname}/public/video.html`
+});
+
+ejs2html({
   path: `${__dirname}/views/yonghui.ejs`,
   outPath: `${__dirname}/public/yonghui.html`
 });
