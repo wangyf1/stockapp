@@ -45,11 +45,6 @@ ejs2html({
 });
 
 ejs2html({
-  path: `${__dirname}/views/about.ejs`,
-  outPath: `${__dirname}/public/about.html`
-});
-
-ejs2html({
   path: `${__dirname}/views/knowledge.ejs`,
   outPath: `${__dirname}/public/knowledge.html`
 });
@@ -66,7 +61,7 @@ ejs2html({
 
 ejs2html({
   path: `${__dirname}/views/terms.ejs`,
-  outPath: `${__dirname}/public/video.html`
+  outPath: `${__dirname}/public/terms.html`
 });
 
 ejs2html({
