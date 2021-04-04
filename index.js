@@ -41,10 +41,10 @@ app.listen(8080);
 // *** GET Routes - display pages ***
 // Root Route
 app.get('/', function (req, res) {
-    res.render('index');
+  res.render('index');
 });
-app.use("/css",express.static(__dirname + "/css"));
-app.use("/js",express.static(__dirname + "/js"));
+app.use("/css", express.static(__dirname + "/css"));
+app.use("/js", express.static(__dirname + "/js"));
 console.log('Example app listening at http://localhost:8080');
 app.get('/about', (req, res) => {
   res.render('about');
@@ -76,14 +76,13 @@ app.get('/yonghui', (req, res) => {
 
 var bodyParser = require('body-parser');
 
-app.use(bodyParser);
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
 app.post('/updatestate', (req, res) => {
   const newValue = updateDatabase(res.body);
   res.json(newValue);
 });
 
-
-app.use(bodyParser());
 
 const MongoClient = require('mongodb').MongoClient;
 const uri = "mongodb+srv://niubi:123@cluster0.lfrkz.mongodb.net/niubi?retryWrites=true&w=majority";
@@ -92,11 +91,11 @@ client.connect(err => {
   const collection = client.db("niubi").collection("email");
   // perform actions on the collection object
   app.post('/post-email', function (req, res) {
-    
+
     collection.insertOne(req.body);
     return res.redirect('/');
     //res.send('Data received:\n' + JSON.stringify(req.body));
-});
+  });
   //client.close();
 });
 
