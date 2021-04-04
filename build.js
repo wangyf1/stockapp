@@ -80,6 +80,11 @@ ejs2html({
 });
 
 ejs2html({
+  path: `${__dirname}/views/nanfang.ejs`,
+  outPath: `${__dirname}/public/nanfang.html`
+});
+
+ejs2html({
   path: `${__dirname}/views/sidebar.ejs`,
   outPath: `${__dirname}/public/sidebar.html`
 });

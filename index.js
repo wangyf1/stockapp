@@ -80,6 +80,9 @@ app.get('/yonghui', (req, res) => {
   res.render('yonghui');
 });
 
+app.get('/nanfang', (req, res) => {
+  res.render('nanfang');
+});
 
 var bodyParser = require('body-parser');
 
