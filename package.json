@@ -16,6 +16,7 @@
         "html-to-react": "^1.4.5",
         "http-server": "*",
         "mongoose": "^5.11.18",
-        "node-pre-gyp": "^0.17.0"
+        "node-pre-gyp": "^0.17.0",
+        "serverless-http": "^2.7.0"
     }
 }

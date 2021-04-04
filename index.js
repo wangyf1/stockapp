@@ -26,6 +26,7 @@
 // Load Node modules
 var express = require('express');
 const router = express.Router();
+const serverless = require('serverless-http');
 
 const ejs = require('ejs');
 // Initialise Express
@@ -74,6 +75,13 @@ app.get('/yonghui', (req, res) => {
 });
 
 var bodyParser = require('body-parser');
+
+app.use(bodyParser);
+app.post('/updatestate', (req, res) => {
+  const newValue = updateDatabase(res.body);
+  res.json(newValue);
+});
+module.exports.handler = serverless(app);
 
 app.use(bodyParser());
 
