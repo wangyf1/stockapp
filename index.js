@@ -45,6 +45,8 @@ app.get('/', function (req, res) {
 });
 app.use("/css", express.static(__dirname + "/css"));
 app.use("/js", express.static(__dirname + "/js"));
+app.use("/excel", express.static(__dirname + "/excel"));
+
 console.log('Example app listening at http://localhost:8080');
 app.get('/about', (req, res) => {
   res.render('about');
