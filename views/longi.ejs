@@ -70,6 +70,8 @@
                     </ul>
                 </nav>
 
+                <div><canvas id="region" width="800" height="700"></canvas></div>
+                <div><canvas id="product" width="800" height="700"></canvas></div>
                 <div><canvas id="profit" width="800" height="700"></canvas></div>
                 <div><canvas id="revenue" width="800" height="700"></canvas></div>
                 <div><canvas id="chart4" width="800" height="700"></canvas></div>
@@ -80,7 +82,7 @@
                 <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
                 <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
                 <div><canvas id="pie" width="800" height="700"></canvas></div>
-                <div><canvas id="region" width="800" height="700"></canvas></div>
+                
 
 
 
@@ -140,8 +142,8 @@
                 },
                 {
                     label: "非洲地区",
-                    backgroundColor: 'rgba(255,0, 0, 1)',
-                    borderColor: 'rgba(255, 0, 0, 1)',
+                    backgroundColor: 'rgba(146,36, 0, 1)',
+                    borderColor: 'rgba(146,36, 0, 1)',
                     data: [0, 0.00049, 0.024, 0.27]
                 }
 
@@ -151,6 +153,74 @@
             title: {
                 display: true,
                 text: '年营业收入（按地区划分）（亿元）'
+            },
+            responsive: false,
+            scales: {
+                xAxes: [{
+                    stacked: true
+                }],
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    },
+                    stacked: true
+                }]
+            }
+        }
+    });
+</script>
+
+<script>
+    var ctx = document.getElementById('product');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['2016-12-31', '2017-12-31', '2018-12-31',
+                '2019-12-31'],
+            datasets: [
+                {
+                    label: "太阳能组件",
+                    backgroundColor: 'rgba(0, 102, 255, 1)',
+                    borderColor: 'rgba(0, 102, 255,1)',
+                    data: [51.0, 91.7, 130.9, 145.7]
+                },
+                {
+                    label: "硅片",
+                    backgroundColor: 'rgba(75, 192, 192, 1)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    data: [50.7, 57.5, 61.2, 87.6]
+                },
+                {
+                    label: "硅棒",
+                    backgroundColor: 'rgba(255, 206, 86, 1)',
+                    borderColor: 'rgba(255, 206, 86, 1)',
+                    data: [0.00497, 1.27, 3.18, 6.49]
+                },
+                {
+                    label: "电站建设及服务",
+                    backgroundColor: 'rgba(255, 51, 0, 1)',
+                    borderColor: 'rgba(255, 51, 0, 1)',
+                    data: [0, 0, 6.81, 20.8]
+                },
+                {
+                    label: "电力",
+                    backgroundColor: 'rgba(146,36, 0, 1)',
+                    borderColor: 'rgba(146,36, 0, 1)',
+                    data: [0.590, 4.47, 7.97, 7.73]
+                },
+                {
+                    label: "电池片",
+                    backgroundColor: 'rgba(0,255, 0, 1)',
+                    borderColor: 'rgba(255, 0, 0, 1)',
+                    data: [3.29, 3.89, 5.22, 4.97]
+                }
+
+            ]
+        },
+        options: {
+            title: {
+                display: true,
+                text: '年营业收入（按不同产品划分）（亿元）'
             },
             responsive: false,
             scales: {
