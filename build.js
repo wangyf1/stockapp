@@ -93,3 +93,8 @@ ejs2html({
   path: `${__dirname}/views/contact.ejs`,
   outPath: `${__dirname}/public/contact.html`
 });
+
+ejs2html({
+  path: `${__dirname}/views/yiwei.ejs`,
+  outPath: `${__dirname}/public/yiwei.html`
+});

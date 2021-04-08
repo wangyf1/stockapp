@@ -86,6 +86,10 @@ app.get('/nanfang', (req, res) => {
   res.render('nanfang');
 });
 
+app.get('/yiwei', (req, res) => {
+  res.render('yiwei');
+});
+
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded());
