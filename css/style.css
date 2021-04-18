@@ -183,6 +183,13 @@ canvas {
 
 /* yanyizhen */
 
+#intro-message {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
+
+
 #table-of-content {
   padding: 10px;
   width: 60%;
