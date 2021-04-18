@@ -183,6 +183,42 @@ canvas {
 
 /* yanyizhen */
 
+#table-of-content {
+  padding: 10px;
+  width: 60%;
+  margin-right: auto;
+}
+#tb-col-1{
+  width: 400px;
+}
+
+#table-of-content a:link {
+  text-decoration: none;
+}
+#table-of-content a:hover {
+  text-decoration: underline !important;
+}
+
+#table-of-content tr {
+  padding-left: 50px;
+  list-style-type: none;
+  border-bottom: thin groove rgba(211,211,211,0.5);
+  font-size: larger;
+}
+
+#tb-date{
+  text-align: center;
+}
+
+#table-of-content span {
+  font-size: medium !important;
+}
+
+#table-of-content th {
+  font-size: x-large;
+  color: #002752;
+}
+
 .explanation{
   display:block;
   min-width: 1062px;
