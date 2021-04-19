@@ -128,9 +128,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .fixed-1 {
-  position: fixed; 
+  position:fixed;
   left: 0;
-  width: 250px
+  width: 250px;
+}
+.fixed-1.push{
+  position:relative;
 }
 .fixed-2 {
   position: fixed; 
@@ -8379,6 +8382,10 @@ h1, h2, h3, h4, h5,
 
 .wrapper {
   width: 100%; }
+
+#hideable{
+  position: fixed; 
+}
 
 #sidebar {
   min-width: 250px;

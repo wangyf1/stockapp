@@ -13,6 +13,7 @@
 	fullHeight();
 
 	$('#sidebarCollapse').on('click', function () {
+      $('.fixed-1').toggleClass('push');
       $('#sidebar').toggleClass('active');
   });
 
