@@ -187,7 +187,11 @@ canvas {
   cursor: pointer;  }
 
 /* yanyizhen */
-
+.responsive{
+    clear: both;
+    display: inline-block;
+    white-space: nowrap;
+}
 #intro-message {
   width: 100%;
   height: 50px;
@@ -197,11 +201,11 @@ canvas {
 
 #table-of-content {
   padding: 10px;
-  width: 60%;
+  width: 100%;
   margin-right: auto;
 }
 #tb-col-1{
-  width: 400px;
+  width: 50%px;
 }
 
 #table-of-content a:link {
