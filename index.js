@@ -90,6 +90,18 @@ app.get('/yiwei', (req, res) => {
   res.render('yiwei');
 });
 
+app.get('/mairui', (req, res) => {
+  res.render('mairui');
+});
+
+app.get('/ziguang', (req, res) => {
+  res.render('ziguang');
+});
+
+app.get('/dfyh', (req, res) => {
+  res.render('dfyh');
+});
+
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded());

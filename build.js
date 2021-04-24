@@ -98,3 +98,18 @@ ejs2html({
   path: `${__dirname}/views/yiwei.ejs`,
   outPath: `${__dirname}/public/yiwei.html`
 });
+
+ejs2html({
+  path: `${__dirname}/views/mairui.ejs`,
+  outPath: `${__dirname}/public/mairui.html`
+});
+
+ejs2html({
+  path: `${__dirname}/views/ziguang.ejs`,
+  outPath: `${__dirname}/public/ziguang.html`
+});
+
+ejs2html({
+  path: `${__dirname}/views/dfyh.ejs`,
+  outPath: `${__dirname}/public/dfyh.html`
+});
