@@ -188,7 +188,7 @@ canvas {
 
 /* yanyizhen */
 .responsive{
-  font-size: calc((.1em + 1vmin) + (.1em + 1vmax));
+  font-size: calc((.1em + .7vmin) + (.1em + .7vmax));
 }
 
 #intro-message {
