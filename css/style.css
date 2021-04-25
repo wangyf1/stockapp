@@ -93,7 +93,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #969ea5 !important;  
   border-radius: .25rem !important;
   width:40% !important;
-  min-width: 400px;
+  min-width: 300px;
 }
 
 .focusedInput:focus{
