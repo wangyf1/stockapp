@@ -44,28 +44,31 @@
             <div id="charts" class="tabcontent">
                 <nav id="navbar">
                     <ul>
-                        <li><a class="nav-link" href="#profit">净利润</a></li>
+                        <li><a class="nav-link" href="#profit">净利润  <u>(净利润计算公式)</u></a></li>
                         <li><a class="nav-link" href="#revenue">营收</a></li>
-                        <li><a class="nav-link" href="#chart4">净利润 vs. 扣非净利润</a></li>
-                        <li><a class="nav-link" href="#chart5">营收 vs. 毛利 vs. 营业利润</a></li>
+                        <li><a class="nav-link" href="#profitWithoutEx">净利润 vs. 扣非净利润</a></li>
+                        <li><a class="nav-link" href="#gross">营收 vs. 毛利 vs. 营业利润</a></li>
                         <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
                         <li><a class="nav-link" href="#FCF">自由现金流</a></li>
                         <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
-                        <li><a class="nav-link" href="#balance_detailed">资产负债分解</a></li>
-                        <li><a class="nav-link" href="#pie">资产负债分解比较</a></li>
+                        <li><a class="nav-link" href="#balance_detailed">资产负债表分解</a></li>
                     </ul>
                 </nav>
-                <div><canvas id="region" width="800" height="700"></canvas></div>
-                <div><canvas id="profit" width="800" height="700"></canvas></div>
-                <div><canvas id="revenue" width="800" height="700"></canvas></div>
-                <div><canvas id="chart4" width="800" height="700"></canvas></div>
-                <div><canvas id="chart5" width="800" height="700"></canvas></div>
+                <div>                        
+                    <canvas id="region" width="800" height="700"></canvas>
+                </div>
+                <div>                        
+                    <canvas id="profit" width="800" height="700"></canvas>
+                </div>
+                <div>
+                    <canvas id="revenue" width="800" height="700"></canvas>
+                </div>
+                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
+                <div><canvas id="gross" width="800" height="700"></canvas></div>
                 <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
                 <div><canvas id="FCF" width="800" height="700"></canvas></div>
-                <div><canvas id="balance" width="800" height="700"></canvas></div>
                 <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
                 <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
-                <div><canvas id="pie" width="800" height="700"></canvas></div>
 
 
 
@@ -84,6 +87,18 @@
             </div>
         </div>
     </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> <!--import chart.js-->
+    <script src="/js/alasql.min.js"></script>       <!--import alasql.js-->
+	<script src="/js/xlsx.core.min.js"></script>    <!--import xlsx.core.js-->	
+    <script src="/js/popper.js"></script>            <!--import popper.js-->
+    <script src="/js/jquery.min.js"></script>       <!--import jQuery-->
+    <script src="/js/bootstrap.min.js"></script>     <!--import bootstrap.js-->
+    <script src="/js/jdf.js"></script>           <!--import maotai.js-->
+    <script src="/js/yyz.js"></script>           <!--import maotai.js-->
+
+
 </body>
 
 <script>
@@ -92,36 +107,37 @@
 </script>
 
 <script>
+    date = ['2020-12-31','2019-12-31', '2018-12-31', '2017-12-31',
+                '2016-12-31', '2015-12-31']
     var ctx = document.getElementById('region');
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['2019-12-31', '2018-12-31', '2017-12-31',
-                '2016-12-31', '2015-12-31'],
+            labels: date.reverse(),
             datasets: [
                 {
                     label: "中国",
                     backgroundColor: 'rgba(0, 102, 255, 1)',
                     borderColor: 'rgba(0, 102, 255,1)',
-                    data: [594, 429, 440, 367, 210]
+                    data: [652, 594, 429, 440, 367, 210].reverse()
                 },
                 {
                     label: "亚洲其他",
                     backgroundColor: 'rgba(75, 192, 192, 1)',
                     borderColor: 'rgba(75, 192, 192, 1)',
-                    data: [450, 442, 442, 286, 213]
+                    data: [549, 450, 442, 442, 286, 213].reverse()
                 },
                 {
                     label: "欧洲",
                     backgroundColor: 'rgba(255, 206, 86, 1)',
                     borderColor: 'rgba(255, 206, 86, 1)',
-                    data: [45, 35, 22, 16, 34]
+                    data: [48, 45, 35, 22, 16, 34].reverse()
                 },
                 {
                     label: "美洲",
                     backgroundColor: 'rgba(255, 51, 0, 1)',
                     borderColor: 'rgba(255, 51, 0, 1)',
-                    data: [70, 63, 32, 18, 34]
+                    data: [103, 70, 63, 32, 18, 34].reverse()
                 }
 
             ]
@@ -148,491 +164,6 @@
 </script>
 
 
-<script>
-    var ctx = document.getElementById('profit');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2020-09-30', '2020-06-30', '2020-03-31', '2019-12-31', '2019-09-30', '2019-06-30', '2019-03-31', '2018-12-31', '2018-09-30', '2018-06-30', '2018-03-31', '2017-12-31', '2017-09-30', '2017-06-30', '2017-03-31', '2016-12-31', '2016-09-30', '2016-06-30', '2016-03-31', '2015-12-31', '2015-09-30', '2015-06-30', '2015-03-31', '2014-12-31', '2014-09-30', '2014-06-30', '2014-03-31', '2013-12-31', '2013-09-30',
-            ],
-            datasets: [
-                {
-                    label: "净利润（亿元）",
-                    backgroundColor: 'rgba(0, 102, 255, 1)',
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    data: [13.40, 5.69, 5.67, 0.66, 1.84, 6.17, 10.52, 0.56, 4.04, 9.57, 20.19, 10.92, 21.73, 18.90, 24.13, 17.42, 6.57, -6.25, 1.08, -3.56, 0.41, 9.73, 9.78, 7.07, 8.13, 4.54, 5.88, 9.94, 5.00,
-                    ]
-                }
 
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '净利润（亿元）'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    stacked: true
-                }]
-            }
-        }
-    });
-</script>
-
-
-<script>
-    var ctx = document.getElementById('revenue');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2020-09-30', '2020-06-30', '2020-03-31', '2019-12-31', '2019-09-30', '2019-06-30', '2019-03-31', '2018-12-31', '2018-09-30', '2018-06-30', '2018-03-31', '2017-12-31', '2017-09-30', '2017-06-30', '2017-03-31', '2016-12-31', '2016-09-30', '2016-06-30', '2016-03-31', '2015-12-31', '2015-09-30', '2015-06-30', '2015-03-31', '2014-12-31', '2014-09-30', '2014-06-30', '2014-03-31', '2013-12-31', '2013-09-30',
-            ],
-            datasets: [
-                {
-                    label: "营业总收入（亿元）",
-                    backgroundColor: 'rgba(0, 102, 255, 1)',
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    data: [408.21, 349.87, 258.80, 303.38, 306.83, 285.85, 264.54, 276.44, 259.91, 219.07, 215.67, 243.92, 248.03, 227.50, 218.55, 230.54, 193.94, 141.51, 122.98, 122.03, 134.50, 113.88, 115.83, 115.28, 91.75, 80.21, 80.92, 90.01, 85.19,
-                    ]
-                },
-
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '营业总收入（亿元）'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    stacked: true
-                }]
-            }
-        }
-    });
-</script>
-
-
-<script>
-    var ctx = document.getElementById('chart4'); //扣非净利润 vs. 净利润
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2020-09-30', '2020-06-30', '2020-03-31', '2019-12-31', '2019-09-30', '2019-06-30', '2019-03-31', '2018-12-31', '2018-09-30', '2018-06-30', '2018-03-31', '2017-12-31', '2017-09-30', '2017-06-30', '2017-03-31', '2016-12-31', '2016-09-30', '2016-06-30', '2016-03-31', '2015-12-31', '2015-09-30', '2015-06-30', '2015-03-31', '2014-12-31', '2014-09-30', '2014-06-30', '2014-03-31', '2013-12-31', '2013-09-30',
-            ],
-            datasets: [
-                {
-                    label: "扣非净利润（亿元）",
-                    backgroundColor: 'rgba(0, 102, 255, 1)',
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    data: [10.64, 3.26, -5.02, -9.78, -8.40, 2.99, 3.52, 4.19, 1.20, 0.13, 9.66, 7.62, 18.99, 17.16, 23.01, 18.13, 5.09, -9.53, -13.57, -7.95, -1.68, 6.96, 8.81, 5.80, 6.97, 3.07, 2.43, 5.04, 4.43,
-                    ]
-                },
-                {
-                    label: "净利润（亿元）",
-                    backgroundColor: 'rgba(255, 51, 0, 0.7)',
-                    borderColor: 'rgba(255, 51, 0, 0.7)',
-                    data: [13.40, 5.69, 5.67, 0.66, 1.84, 6.17, 10.52, 0.56, 4.04, 9.57, 20.19, 10.92, 21.73, 18.90, 24.13, 17.42, 6.57, -6.25, 1.08, -3.56, 0.41, 9.73, 9.78, 7.07, 8.13, 4.54, 5.88, 9.94, 5.00,
-                    ]
-                }
-
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '扣非净利润 vs. 净利润（亿元）'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                }]
-            }
-        }
-    });
-</script>
-
-
-<script>
-    var ctx = document.getElementById('chart5'); //营业总收入 vs. 毛利 vs. 营业利润
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2020-09-30', '2020-06-30', '2020-03-31', '2019-12-31', '2019-09-30', '2019-06-30', '2019-03-31', '2018-12-31', '2018-09-30', '2018-06-30', '2018-03-31', '2017-12-31', '2017-09-30', '2017-06-30', '2017-03-31', '2016-12-31', '2016-09-30', '2016-06-30', '2016-03-31', '2015-12-31', '2015-09-30', '2015-06-30', '2015-03-31', '2014-12-31', '2014-09-30', '2014-06-30', '2014-03-31', '2013-12-31', '2013-09-30',
-            ],
-            datasets: [
-                {
-                    label: "营业总收入（亿元）",
-                    backgroundColor: 'rgba(0, 102, 255, 1)',
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    data: [408.21, 349.87, 258.80, 303.38, 306.83, 285.85, 264.54, 276.44, 259.91, 219.07, 215.67, 243.92, 248.03, 227.50, 218.55, 230.54, 193.94, 141.51, 122.98, 122.03, 134.50, 113.88, 115.83, 115.28, 91.75, 80.21, 80.92, 90.01, 85.19,
-                    ]
-                },
-                {
-                    label: "毛利（亿元）",
-                    backgroundColor: 'rgba(255, 51, 0, 0.7)',
-                    borderColor: 'rgba(255, 51, 0, 0.7)',
-                    data: [75.96, 58.92, 37.06, 47.61, 36.25, 45.55, 46.72, 67.28, 47.45, 38.50, 44.79, 53.85, 57.63, 61.12, 62.57, 62.85, 35.64, 16.86, 7.75, 18.34, 25.73, 25.78, 28.83, 26.67, 21.62, 18.74, 16.09, 20.73, 22.05,
-                    ]
-                },
-                {
-                    label: "营业利润（亿元）",
-                    backgroundColor: 'rgba(0, 151, 0, 0.7)',
-                    borderColor: 'rgba(0, 151, 0, 0.7)',
-                    data: [18.20, 5.16, 0.81, -7.30, -5.88, 4.63, 12.54, 1.94, 4.15, 10.41, 23.59, 15.69, 26.04, 24.28, 30.74, 21.44, 6.78, -9.93, -13.26, -8.91, -1.09, 8.54, 10.98, 6.97, 8.31, 4.50, 3.30, 5.86, 6.22,
-                    ]
-                }
-
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '营业总收入 vs. 毛利 vs. 营业利润（亿元）'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                }]
-            }
-        }
-    });
-</script>
-
-
-<script>
-    var ctx = document.getElementById('operating_expense'); // Operating Expense Breakdown
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2020-09-30', '2020-06-30', '2020-03-31', '2019-12-31', '2019-09-30', '2019-06-30', '2019-03-31', '2018-12-31', '2018-09-30', '2018-06-30', '2018-03-31', '2017-12-31', '2017-09-30', '2017-06-30', '2017-03-31', '2016-12-31', '2016-09-30', '2016-06-30', '2016-03-31', '2015-12-31', '2015-09-30', '2015-06-30', '2015-03-31', '2014-12-31', '2014-09-30', '2014-06-30', '2014-03-31', '2013-12-31', '2013-09-30',
-            ],
-            datasets: [
-                {
-                    label: "销售费用（亿元）",
-                    backgroundColor: 'rgba(0, 102, 255, 1)',
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    data: [10.19, 7.63, 6.87, 9.21, 6.32, 6.73, 6.93, 8.45, 7.52, 6.50, 6.45, 6.03, 7.60, 5.36, 6.92, 8.12, 4.77, 3.85, 3.12, 3.81, 3.77, 2.40, 2.93, 2.51, 2.65, 2.46, 2.36, 2.15, 3.13,
-                    ]
-                },
-                {
-                    label: "管理费用（亿元）",
-                    backgroundColor: 'rgba(75, 192, 192, 1)',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    data: [21.34, 13.43, 11.75, 16.46, 13.72, 11.09, 10.88, 13.44, 14.71, 11.01, 10.43, 13.99, -3.82, 15.50, 15.03, 17.41, 15.67, 11.13, 11.98, 11.63, 12.61, 11.27, 11.26, 12.44, 9.34, 9.24, 7.75, 10.36, 7.90,
-                    ]
-                },
-                {
-                    label: "研发费用（亿元）",
-                    backgroundColor: 'rgba(255, 206, 86, 1)',
-                    borderColor: 'rgba(255, 206, 86, 1)',
-                    data: [20.07, 16.76, 15.68, 21.68, 16.08, 14.78, 14.46, 24.51, 9.89, 8.32, 7.68, 9.62, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00, 0.00,
-                    ]
-                },
-                {
-                    label: "财务费用（亿元）",
-                    backgroundColor: 'rgba(255, 51, 0, 1)',
-                    borderColor: 'rgba(255, 51, 0, 1)',
-                    data: [7.22, 6.95, 5.10, 6.13, 2.14, 5.75, 5.92, 9.54, 10.41, 8.27, 3.75, 5.35, 3.14, 6.20, 4.79, 4.59, 6.05, 8.64, 3.71, 4.46, 8.74, 0.05, 1.72, -1.39, -1.55, -0.78, 1.85, 0.01, 2.07,
-                    ]
-                }
-
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '营业费用分类（亿元）'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    stacked: true
-                }]
-            }
-        }
-    });
-</script>
-
-
-<script>
-    var ctx = document.getElementById('FCF');  //自由现金流
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2020-09-30', '2020-06-30', '2020-03-31', '2019-12-31', '2019-09-30', '2019-06-30', '2019-03-31', '2018-12-31', '2018-09-30', '2018-06-30', '2018-03-31', '2017-12-31', '2017-09-30', '2017-06-30', '2017-03-31', '2016-12-31', '2016-09-30', '2016-06-30', '2016-03-31', '2015-12-31', '2015-09-30', '2015-06-30', '2015-03-31', '2014-12-31', '2014-09-30', '2014-06-30', '2014-03-31', '2013-12-31', '2013-09-30',
-            ],
-            datasets: [
-                {
-                    label: "自由现金流（亿元）",
-                    backgroundColor: 'rgba(0, 102, 255, 1)',
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    data: [15.64, -45.53, -49.65, -20.19, -82.04, -61.42, -69.48, -94.49, -85.07, -68.72, -39.11, -37.97, -29.39, -64.97, -77.75, -115.82, -45.50, -36.61, -6.21, -22.15, -8.48, -18.09, -32.16, -35.20, -36.44, -36.39, -23.63, -12.29, -35.26,
-                    ]
-                }
-
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '自由现金流 (亿元)'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                    stacked: true
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                    stacked: true
-                }]
-            }
-        }
-    });
-</script>
-
-
-<script>
-    var ctx = document.getElementById('balance'); //资产 + 负债
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008', '2007',
-            ],
-            datasets: [
-                {
-                    type: 'line',
-                    label: "股东权益（亿元）",
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    backgroundColor: 'rgba(0, 102, 255,0)',
-                    borderwidth: 2,
-                    data: [1410.58, 1203.57, 1042.84, 920.16, 783.51, 769.59, 381.54, 352.65, 350.45, 342.60, 219.36, 67.19, 55.21,
-                    ]
-                },
-                {
-                    type: 'bar',
-                    label: "总资产 （亿元）",
-                    backgroundColor: 'rgba(255, 51, 0, 0.7)',
-                    borderColor: 'rgba(255, 51, 0, 0.7)',
-                    data: [3404.12, 3040.28, 2561.09, 2051.35, 1525.93, 1362.40, 925.38, 671.05, 687.69, 542.30, 306.14, 139.41, 133.81,
-                    ]
-                },
-                {
-                    type: 'bar',
-                    label: "总负债 （亿元）",
-                    backgroundColor: 'rgba(0, 51, 0, 0.7)',
-                    borderColor: 'rgba(0, 51, 0, 0.7)',
-                    data: [1993.55, 1836.71, 1518.24, 1131.19, 742.42, 592.81, 543.84, 318.41, 337.24, 199.70, 86.78, 72.22, 78.60,
-                    ]
-                }
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '资产负债情况'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                }]
-            }
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('cash_flow'); //现金流
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2020-09-30', '2020-06-30', '2020-03-31', '2019-12-31', '2019-09-30', '2019-06-30', '2019-03-31', '2018-12-31', '2018-09-30', '2018-06-30', '2018-03-31', '2017-12-31', '2017-09-30', '2017-06-30', '2017-03-31', '2016-12-31', '2016-09-30', '2016-06-30', '2016-03-31', '2015-12-31', '2015-09-30', '2015-06-30', '2015-03-31', '2014-12-31', '2014-09-30', '2014-06-30', '2014-03-31', '2013-12-31', '2013-09-30',
-            ],
-            datasets: [
-                {
-                    label: "经营活动现金流（亿元）",
-                    backgroundColor: 'rgba(0, 102, 255, 1)',
-                    borderColor: 'rgba(0, 102, 255,1)',
-                    data: [137.52, 44.93, 52.24, 95.56, 49.32, 54.31, 61.64, 72.44, 68.58, 43.83, 71.98, 82.36, 78.52, 44.23, 62.16, 35.25, 38.14, -0.34, 27.68, 26.60, 23.80, 31.51, 23.03, 34.52, 13.90, 15.74, 16.80, 46.26, 6.02,
-                    ]
-                },
-                {
-                    label: "投资活动现金流（亿元）",
-                    backgroundColor: 'rgba(255, 51, 0, 0.7)',
-                    borderColor: 'rgba(255, 51, 0, 0.7)',
-                    data: [-148.94, -64.85, -80.92, -136.18, -121.88, -89.26, -126.84, -148.74, -82.40, -108.82, -130.67, -118.10, -157.22, -147.59, -172.30, -65.80, -52.82, -111.22, -15.11, -37.46, -42.78, -62.54, -53.16, -87.03, -56.45, -62.19, -31.87, -26.95, -79.48,
-                    ]
-                },
-                {
-                    label: "筹资活动现金流（亿元）",
-                    backgroundColor: 'rgba(0, 151, 0, 0.7)',
-                    borderColor: 'rgba(0, 151, 0, 0.7)',
-                    data: [63.86, 38.27, 20.22, 116.70, 92.27, 22.14, 46.67, 38.85, 35.33, 24.08, 57.41, 58.67, 118.09, 105.54, 46.95, 150.02, -27.31, 166.20, -27.49, 46.62, 17.68, 23.17, -6.18, 56.53, -6.16, -12.45, 318.49, -20.54, 15.65,
-                    ]
-                }
-
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '现金流来源与对比（亿元）'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                    ticks: {
-                    },
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                }]
-            }
-        }
-    });
-</script>
-
-<script>
-    var ctx = document.getElementById('balance_detailed'); //资产 + 负债（流动非流动）
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010', '2009', '2008', '2007',
-            ],
-            datasets: [
-                {
-                    type: 'line',
-                    label: "股东权益（亿元）",
-                    borderColor: 'rgba(75, 204, 230,1)',
-                    backgroundColor: 'rgba(75, 204, 230,0)',
-                    borderwidth: 2,
-                    data: [1410.58, 1203.57, 1042.84, 920.16, 783.51, 769.59, 381.54, 352.65, 350.45, 342.60, 219.36, 67.19, 55.21,
-                    ]
-                },
-                {
-                    type: 'bar',
-                    label: "流动资产 （亿元）",
-                    stack: 'stack0',
-                    backgroundColor: 'rgba(0, 151, 0, 0.7)',
-                    borderColor: 'rgba(0, 151, 0, 0.7)',
-                    data: [2359.64, 2043.36, 1563.28, 1140.93, 888.36, 775.55, 608.92, 412.74, 408.24, 264.38, 120.01, 83.39, 87.17,
-                    ]
-                },
-                {
-                    type: 'bar',
-                    label: "非流动资产 （亿元）",
-                    stack: 'stack0',
-                    backgroundColor: 'rgba(224, 30, 30, 0.7)',
-                    borderColor: 'rgba(224, 30, 30, 0.7)',
-                    data: [1257.86, 1281.58, 886.25, 699.48, 635.65, 493.98, 324.96, 345.34, 283.89, 152.88, 79.55, 65.42, 68.97,
-                    ]
-                },
-
-                {
-                    type: 'bar',
-                    label: "流动负债 （亿元）",
-                    stack: 'stack1',
-                    backgroundColor: 'rgba(233, 141, 36, 0.7)',
-                    borderColor: 'rgba(233, 141, 36, 0.7)',
-                    data: [783.78, 622.28, 497.36, 414.40, 288.71, 189.77, 261.92, 124.15, 169.56, 110.61, 37.61, 42.16, 32.99,
-                    ]
-                },
-                {
-                    type: 'bar',
-                    label: "非流动负债 （亿元）",
-                    stack: 'stack1',
-                    backgroundColor: 'rgba(0, 51, 200, 0.7)',
-                    borderColor: 'rgba(0, 51, 200, 0.7)',
-                    data: [1209.76, 1214.43, 1020.88, 716.79, 453.71, 403.04, 281.92, 194.26, 167.68, 89.10, 49.16, 30.07, 45.61,
-                    ]
-                }
-            ]
-        },
-        options: {
-            title: {
-                display: true,
-                text: '资产负债情况'
-            },
-            responsive: false,
-            scales: {
-                xAxes: [{
-                }],
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    },
-                }]
-            }
-        }
-    });
-</script>
-
-
-<script>
-    var ctx = document.getElementById('pie'); //pie
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            datasets: [
-                {
-                    label: "dataset1",
-                    backgroundColor: ['rgba(75, 0, 230,1)', 'rgba(75, 204, 0,1)', 'rgba(0, 204, 230,1)', 'rgba(75, 0, 0,1)'],
-                    data: [1044.49, 2359.64, 783.78, 1257.86]
-                },
-
-            ],
-            labels: ['流动资产', '非流动资产', '流动负债', '非流动负债']
-        },
-        options: {
-            title: {
-                display: true,
-                text: '资产负债分解'
-            },
-            responsive: false,
-
-        }
-    });
-</script>
 
 </html>
