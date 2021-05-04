@@ -102,6 +102,10 @@ app.get('/dfyh', (req, res) => {
   res.render('dfyh');
 });
 
+app.get('/ningde', (req, res) => {
+  res.render('ningde');
+});
+
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded());

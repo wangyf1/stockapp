@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        宁德时代
+    </title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+
+            <%- include('sidebar.ejs') %>
+            </nav>
+
+
+        <!-- Page Content  -->
+
+        <!--term explanation-->
+        <div id='profitDescription' class="moving-div">profit = revenue - Expense</div>
+
+        <div id="content">
+            <!-- Tab links -->
+            <div class="tab">
+                <a href="/"><button class="tablinks" >返回主页</button></a>
+                <button class="tablinks" onclick="openCity(event, 'basicInfo')">公司信息</button>
+                <button class="tablinks" onclick="openCity(event, 'charts')" id="defaultOpen">公司图表</button>
+                <button class="tablinks" onclick="openCity(event, 'managements')">公司管理</button>
+                <button class="tablinks" onclick="openCity(event, 'stockNews')">股票新闻</button>
+                <button class="tablinks" onclick="openCity(event, 'links')">公司链接</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="basicInfo" class="tabcontent">
+                <h3>宁德时代基本信息</h3>
+                <p>宁德时代新能源科技股份有限公司是全球领先的锂离子电池提供商，专注于新能源汽车动力电池系统、储能系统的研发、生产和销 售，致力于为全球新能源应用提供一流解决方案。公司在电池材料、电池系统、电池回收等产业链关键领 域拥有核心技术优势及可持续研发能力，形成了全面、完善的生产服务体系，并通过商业模式创新推动锂 离子电池作为优质能源储存载体的广泛应用。 </p>
+                <h4>三大发展方向</h4>
+                <p>三大发展方向:以可再生能源和储能为核心,实现固定式化石能源替代;以动力电池为核心
+                    实现移动式化石能源替代;以电动化+智能化为核心,实现市场应用的集成创新</p>
+                 <h4>主要产品及其用途 </h4>   
+                    <p>公司主要产品包括动力电池系统、储能系统和锂电池材料。
+                    动力电池系统 公司动力电池系统产品包括电芯、模组/电箱及电池包，应用领域涵盖新能源乘用车、新能源商用车以 及其他新能源出行工具及非道路移动机械等。公司动力电池系统能够满足启停、快充、长寿命、长续航里 程等多种功能需求，产品具有高能量密度、多循环次数、安全可靠等特点。公司根据应用领域及客户要求， 通过定制或联合研发等方式设计个性化产品方案，以满足客户对产品性能的不同需求。 在新能源乘用车领域，公司动力电池目前已广泛应用于纯电动乘用车、插电式混合动力乘用车、混合 动力乘用车及微混乘用车，形成包括高能量密度的三元高镍电池以及高性价比的磷酸铁锂电池等在内的完 整产品系列。 在新能源客车领域，公司动力电池目前已广泛应用于纯电动客车、插电式混合动力客车和混合动力客 车，如城市公交、商务旅游大巴、摆渡车等。在新能源卡车领域，公司产品可运用于电动重卡、轻型卡车 及物流车等商用车领域。在新能源二轮车领域，公司产品可应用于电动自行车、电动摩托车等领域，涵盖 共享、换电等商业模式。此外，公司还开发其他专用车市场并提供定制化解决方案，如环卫车、港口拖车 等。 公司动力电池产品还可广泛应用于电动船舶、叉车和工程机械等领域。 
+                     储能系统 公司储能系统产品包括电芯、模组/电箱和电池柜等，可用于发电、输配电和用电领域，涵盖太阳能或 风能发电储能配套、工业企业储能、商业楼宇及数据中心储能、储能充电站、通信基站后备电池、家用储 能等，可有效克服风能或太阳能发电输出不规则的特点、弥补线损功率补偿、跟踪计划削峰填谷，提高风 力及光伏发电系统能源利用率以及实现用电领域峰谷电之间的平衡。
+                    锂电池材料 公司可将废旧锂离子电池中的镍钴锰锂等有价金属通过加工、提纯、合成等工艺，生产三元前驱体等 锂离子电池材料，使镍钴锰锂等资源实现循环利用；公司也可通过外购材料进行锂离子电池材料的加工生 产。 
+                    </p>
+                    <h4>主要的业绩驱动因素</h4>
+                    <h6>1、汽车消费企稳回升</h6>
+                    <p> 
+                    国内方面，2020 年，国民经济克服了新冠肺炎疫情的严重冲击并稳步恢复。根据国家统计局，全年国 内生产总值同比增长 2.3%，分季度看，一季度同比下降 6.8%，二、三、四季度分别同比增长 3.2、4.9%、 6.5%。宏观经济稳步恢复有利于促进汽车消费，根据中国汽车工业协会数据，国内汽车市场从 4 月开始逐 步恢复，月度销量同比持续保持增长，2020 年我国新能源车销量达 136.7 万辆，同比增长 10.9%。 海外方面，受疫情影响，欧洲 30 国 2020 年实现乘用车注册量 1,187.8 万辆，同比下降 24.7%，但德国、 英国、法国等国为提振经济及减少碳排放，陆续出台鼓励政策，积极推动新能源车消费。根据欧洲汽车制造商协会数据，新能源乘用车全年注册量达 136.4 万辆，同比增长 143.8%。
+                    </p>  
+                    <h6>2、产业政策支持</h6> 
+                 <p> 
+                    （1）新能源车 国内市场，2020 年 4 月，国家财政部等部委发布新能源车免征购置税和补贴政策，免税和补贴政策延 续至 2022 年底，平缓补贴退坡力度和节奏。 海外市场，2019 年 4 月出台的欧洲碳排新政于 2020 年 1 月开始执行，各国加大对新能源车购车补贴 力度等政策扶持，单车补贴最高可达 9000 欧元，提振了新能源车消费。
+                     （2）储能 国内市场，2020 年 8 月，国家发改委、国家能源局联合发布《关于开展“风光水火储一体化”“源网荷 储一体化”的指导意见》，提出应在电源侧因地制宜采取风光水火多能互补，并适度增加一定比例储能，开 展区域（省）级、市（县）级、园区级源网荷储一体化，实现源网荷储深度协同。截至 2020 年底，10 余 个省份推出可再生能源配备储能政策，储能行业迎来发展契机。 海外市场，2020 年 9 月，欧盟委员会推出了《2030 年气候目标计划》，明确了将《巴黎协定》下的欧 盟国家自主贡献从先前的与 1990 年相比减排 40%的目标提高到至少减排 55%，并制定了各经济部门实现 目标的政策行动，其中到 2030 年计划可再生能源发电占比从目前的 32%提高至 65%以上，可再生能源装 机占比提升有望拉动储能需求增长。
+                    </p>
+                    <h6>3、新能源车消费需求增长</h6>
+                  <p>  2020 年我国工信部公布的新能源车型有效目录共 6,800 余款车型，相较 2019 年多出 2200 余款车型， 可供消费者选择的车型增加。同时，新能源车主流车型续航里程提升，智能化属性增强，用户运营与服务 差异化为新能源车消费者带来良好体验。此外，充换电设施的进一步完善，改善新能源车使用条件。根据 中国电动车充电基础设施促进联盟数据，截至 2020 年底，全国公共类充电设施新增 46.2 万台，保有量达 80.7 万台。新能源车产品力提升和充换电基础设施的完善，推动消费者需求的快速增长。 
+
+                    2020年，公司克服了新冠病毒肺炎疫情带来的冲击，灵活应对市场及行业变化，持续加大研发力度， 优化产品结构和市场策略，稳步扩张产能以满足客户订单需求。同时，公司继续夯实业内最广泛的客户基 础，随着生产经营规模的持续扩大，公司在供应链管理、成本控制、市场开拓、技术迭代、客户服务等方 面的竞争优势逐渐凸显。 报告期内，公司实现营业总收入5,031,948.77万元，同比增长9.90%，归属于上市公司股东的净利润为 558,333.87万元，同比增长22.43%。报告期内，公司实现锂离子电池销量 46.84GWh，同比增长14.36%， 其中动力电池系统销量44.45GWh，同比增长10.43%。
+                    </p>  
+            </div>
+
+            <div id="charts" class="tabcontent">
+                <nav id="navbar">
+                    <ul>
+                        <li><a class="nav-link" href="#profit">净利润  <u>(净利润计算公式)</u></a></li>
+                        <li><a class="nav-link" href="#revenue">营收</a></li>
+                        <li><a class="nav-link" href="#profitWithoutEx">净利润 vs. 扣非净利润</a></li>
+                        <li><a class="nav-link" href="#gross">营收 vs. 毛利 vs. 营业利润</a></li>
+                        <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
+                        <li><a class="nav-link" href="#FCF">自由现金流</a></li>
+                        <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
+                        <li><a class="nav-link" href="#balance_detailed">资产负债表分解</a></li>
+                    </ul>
+                </nav>
+                <div>                        
+                    <canvas id="profit" width="800" height="700"></canvas>
+                </div>
+                <div>
+                    <canvas id="revenue" width="800" height="700"></canvas>
+                </div>
+                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
+                <div><canvas id="gross" width="800" height="700"></canvas></div>
+                <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
+                <div><canvas id="FCF" width="800" height="700"></canvas></div>
+                <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
+                <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
+
+
+
+            </div>
+
+            <div id="managements" class="tabcontent">
+                <h3>总裁：</h3>
+            </div>
+
+            <div id="stockNews" class="tabcontent">
+                <h3>买到就是赚到</h3>
+            </div>
+
+            <div id="links" class="tabcontent">
+                <h3><u><a href='https://www.catl.com'>宁德时代</a></u></h3>
+            </div>
+        </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> <!--import chart.js-->
+    <script src="/js/alasql.min.js"></script>       <!--import alasql.js-->
+	<script src="/js/xlsx.core.min.js"></script>    <!--import xlsx.core.js-->	
+    <script src="/js/popper.js"></script>            <!--import popper.js-->
+    <script src="/js/jquery.min.js"></script>       <!--import jQuery-->
+    <script src="/js/bootstrap.min.js"></script>     <!--import bootstrap.js-->
+    <script src="/js/ningde.js"></script>           <!--import maotai.js-->
+    <script src="/js/yyz.js"></script>           <!--import maotai.js-->
+
+
+</body>
+
+
+
+</html>

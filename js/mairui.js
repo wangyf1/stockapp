@@ -2,7 +2,7 @@
 document.getElementById("defaultOpen").click();
 
 //Import Excel data
-alasql.promise('select * from xlsx("../excel/mairui/exportedExcel mairuiyiliao.xlsx",{range:"B2:AD32"})')
+alasql.promise('select * from xlsx("../excel/mairui/exportedExcelMairui.xlsx",{range:"B2:AD32"})')
     .then(function(data){
         console.log(data);
 

@@ -113,3 +113,7 @@ ejs2html({
   path: `${__dirname}/views/dfyh.ejs`,
   outPath: `${__dirname}/public/dfyh.html`
 });
+ejs2html({
+  path: `${__dirname}/views/ningde.ejs`,
+  outPath: `${__dirname}/public/ningde.html`
+});
