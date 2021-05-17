@@ -2,13 +2,17 @@
 document.getElementById("defaultOpen").click();
 
 //Import Excel data
-alasql.promise('select * from xlsx("../excel/mairui/exportedExcelMairui.xlsx",{range:"B2:AD32"})')
+alasql.promise('select * from xlsx("../excel/mairui/exportedExcel.xlsx",{range:"B2:AD32"})')
     .then(function(data){
         console.log(data);
 
+
         //Put excel data into array
         var timeKeys = Object.keys(data[0]).reverse(); //Date (日期)
+        console.log(timeKeys)
+
         var profit = Object.values(data[0]).reverse(); //Profit （利润）
+        console.log(profit)
         var profitWithoutEx = Object.values(data[1]).reverse(); //profit without extraordinary item（扣非净利润）
         var revenue = Object.values(data[2]).reverse(); //Revenue （总营收）
         var grossProfit = Object.values(data[28]).reverse(); //Gross Profit （毛利）
@@ -19,6 +23,7 @@ alasql.promise('select * from xlsx("../excel/mairui/exportedExcelMairui.xlsx",{r
         for (let i=0;i<capex.length;i++){             //Capital Expenditure (资本性支出) 变成负数
             capex[i] = -1*capex[i];
         }
+
         var operatingCashFlow = Object.values(data[3]).reverse(); //operating cash flow (经营活动现金流)
         var sales = Object.values(data[9]).reverse(); //销售费用
         var management = Object.values(data[10]).reverse(); //管理费用
