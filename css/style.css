@@ -88,6 +88,53 @@ h1, h2, h3, h4, h5, h6 {
   } 
 }
 
+/* yanyizhen - Below is for mobile navbar content */
+
+@media (min-width: 998px) {
+  .topnav {
+    display:none; 
+  } 
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  position: relative;
+  top:-50px;  
+  width:100%;
+  margin:auto;
+}
+
+.topnav #myLinks {
+  display: none;
+}
+
+.topnav a {
+  color: white;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  display: block;
+}
+
+.topnav a.icon {
+  background: darkgray;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.active {
+  background-color: #272330;
+  color: white;
+}
+/* Yizhen - above is for mobile navbar content */
+
 
 .thin-border {
   border: 1px solid #969ea5 !important;  

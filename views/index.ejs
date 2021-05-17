@@ -21,6 +21,8 @@
 		<div id='moving-div-4' class="moving-div">贵州茅台最近暴跌</div>
 	-->
 
+	
+
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<%- include('sidebar.ejs') %>
@@ -28,6 +30,25 @@
 
 		<!-- Page Content  -->
 		<div id="content" class="p-4 p-md-5 pt-5">
+			
+			<!-- mobile Navigation Menu -->
+			<div class="topnav">
+				<a href="#home" class="active logo">牛逼股票网</a>
+				<div id="myLinks">
+					<a href="About">About</a>
+					<a href="Knowledge">Knowledge</a>
+					<a href="video">视频</a>
+					<a href="Contact">Contact</a>
+					<a href="terms">Terms/Privacy</a>
+					
+				</div>
+				<a href="javascript:void(0);" class="icon" onclick="expandBar()">
+					<i class="fa fa-bars"></i>
+				</a>
+				
+			</div>
+		  	<!-- End mobile navigation menu -->
+
 			<div id='intro-message'>
 				欢迎使用本网站，本网站还处在初期建设中，如有缺陷，敬请包涵和谅解。 如对网站有任何建议，请通过邮箱联系我们：<a
 					href="mailto: yanyizhen1996@gmail.com">yanyizhen1996@gmail.com</a>
@@ -174,3 +195,13 @@
 </body>
 
 </html>
+<script>
+	function expandBar() {
+		var x = document.getElementById("myLinks");
+		if (x.style.display === "block") {
+		x.style.display = "none";
+		} else {
+		x.style.display = "block";
+		}
+	}
+</script>
