@@ -117,3 +117,15 @@ ejs2html({
   path: `${__dirname}/views/ningde.ejs`,
   outPath: `${__dirname}/public/ningde.html`
 });
+ejs2html({
+  path: `${__dirname}/views/wuliangye.ejs`,
+  outPath: `${__dirname}/public/wuliangye.html`
+});
+ejs2html({
+  path: `${__dirname}/views/tianci.ejs`,
+  outPath: `${__dirname}/public/tianci.html`
+});
+ejs2html({
+  path: `${__dirname}/views/changchun.ejs`,
+  outPath: `${__dirname}/public/changchun.html`
+});

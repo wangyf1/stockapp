@@ -106,6 +106,18 @@ app.get('/ningde', (req, res) => {
   res.render('ningde');
 });
 
+app.get('/wuliangye', (req, res) => {
+  res.render('wuliangye');
+});
+
+app.get('/tianci', (req, res) => {
+  res.render('tianci');
+});
+
+app.get('/changchun', (req, res) => {
+  res.render('changchun');
+});
+
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded());

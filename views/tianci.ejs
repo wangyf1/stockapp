@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        天赐材料
+    </title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+
+            <%- include('sidebar.ejs') %>
+            </nav>
+
+
+        <!-- Page Content  -->
+
+        <!--term explanation-->
+        <div id='profitDescription' class="moving-div">profit = revenue - Expense</div>
+
+        <div id="content">
+            <!-- Tab links -->
+            <div class="tab">
+                <a href="/"><button class="tablinks" >返回主页</button></a>
+                <button class="tablinks" onclick="openCity(event, 'basicInfo')">公司信息</button>
+                <button class="tablinks" onclick="openCity(event, 'charts')" id="defaultOpen">公司图表</button>
+                <button class="tablinks" onclick="openCity(event, 'managements')">公司管理</button>
+                <button class="tablinks" onclick="openCity(event, 'stockNews')">股票新闻</button>
+                <button class="tablinks" onclick="openCity(event, 'links')">公司链接</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="basicInfo" class="tabcontent">
+                <h3>天赐材料</h3>
+                <p>广州天赐高新材料股份有限公司
+                    （以下简称“公司”）成立于2000年6月，并于2014年1月在深圳证券交易所中小板成功挂牌上市（证券简称：天赐材料，证券代码：002709）。自2000年成立以来，公司一直致力于精细化工新材料的研发、生产和销售，目前拥有锂离子电池材料、日化材料及特种化学品两大业务板块，拥有自主知识产权、核心技术和自主品牌，是国家高新技术企业、广东省创新型企业、广东优秀民营科技企业、广东省知识产权优势企业、广东省中小企业创新产业化示范基地、广东省战略性新兴产业培育企业、广东省自主创新100强企业。
+                    </p>
+                <p>天赐材料始终重视自主研发和创新，拥有国家级企业技术中心、院士工作站、博士后科研工作站、广东省精细化工材料工程技术研发中心、广东省企业技术中心、江西省企业技术中心、广东省动力锂电池电解质材料工程实验室、电化学储能材料与技术教育部工程技术研发中心，已经形成了具有国际竞争力的精细化学品研发、生产和销售的总体能力，依靠在精细化工领域多年的经验及技术的积累，建立了以研发引导技术、以技术推动产品的发展模式。基于柔性中试体系及行业领先的化工工程能力，天赐材料发展出锂离子电池材料、日化材料及特种化学品两大业务板块。
+                </p>
+                <p>天赐材料是国内主要的锂离子电池材料、个人护理品功能材料生产商之一，拥有同行业中规模较大的研发中心，形成了研究-技术-应用的产品一体化评价体系，在国内外享有重要的行业地位、技术水平处于国内领先，并具有较大的影响力及行业带头示范作用。
+
+                    天赐材料以创造完美品质为使命，通过不断地研发安全、环保、性能优良、具备国际品质的精细化工原料，为顾客生产和制造稳定、均一、可靠的产品，使顾客获取更优的价值。公司愿景是成为精细化工行业的国际化一流企业，致力于建立精细化工行业的高档品牌形象，产品力求达到国际水准，业务上成为国际知名企业。
+                    </p> 
+            </div>
+
+            <div id="charts" class="tabcontent">
+                <nav id="navbar">
+                    <ul>
+                        <li><a class="nav-link" href="#profit">净利润</a></li>
+                        <li><a class="nav-link" href="#revenue">营收</a></li>
+                        <li><a class="nav-link" href="#profitWithoutEx">净利润 vs. 扣非净利润</a></li>
+                        <li><a class="nav-link" href="#gross">营收 vs. 毛利 vs. 营业利润</a></li>
+                        <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
+                        <li><a class="nav-link" href="#FCF">自由现金流</a></li>
+                        <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
+                        <li><a class="nav-link" href="#balance_detailed">资产负债表分解</a></li>
+
+                    </ul>
+                </nav>
+                <div>                        
+                    <div class="explanation" id='profitHover'><u><a href="">净利润如何计算？</a></u></div>
+                    <canvas id="profit" width="800" height="700"></canvas>
+                </div>
+                <div>
+                    <canvas id="revenue" width="800" height="700"></canvas>
+                </div>
+                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
+                <div><canvas id="gross" width="800" height="700"></canvas></div>
+                <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
+                <div><canvas id="FCF" width="800" height="700"></canvas></div>
+                <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
+                <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
+
+
+
+            </div>
+
+            <div id="managements" class="tabcontent">
+                <h3>天赐材料</h3>
+            </div>
+
+            <div id="stockNews" class="tabcontent">
+                <h3>买到就是赚到别买了吧</h3>
+            </div>
+
+            <div id="links" class="tabcontent">
+                <h3><u><a href='https://www.tinci.com'>天赐材料</a></u></h3>
+            </div>
+        </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> <!--import chart.js-->
+    <script src="/js/alasql.min.js"></script>       <!--import alasql.js-->
+	<script src="/js/xlsx.core.min.js"></script>    <!--import xlsx.core.js-->	
+    <script src="/js/popper.js"></script>            <!--import popper.js-->
+    <script src="/js/jquery.min.js"></script>       <!--import jQuery-->
+    <script src="/js/bootstrap.min.js"></script>     <!--import bootstrap.js-->
+    <script src="/js/tianci.js"></script>           <!--import maotai.js-->
+    <script src="/js/yyz.js"></script>           <!--import maotai.js-->
+
+
+</body>
+
+
+
+</html>

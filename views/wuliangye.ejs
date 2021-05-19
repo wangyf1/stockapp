@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        五粮液
+    </title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+
+            <%- include('sidebar.ejs') %>
+            </nav>
+
+
+        <!-- Page Content  -->
+
+        <!--term explanation-->
+        <div id='profitDescription' class="moving-div">profit = revenue - Expense</div>
+
+        <div id="content">
+            <!-- Tab links -->
+            <div class="tab">
+                <a href="/"><button class="tablinks" >返回主页</button></a>
+                <button class="tablinks" onclick="openCity(event, 'basicInfo')">公司信息</button>
+                <button class="tablinks" onclick="openCity(event, 'charts')" id="defaultOpen">公司图表</button>
+                <button class="tablinks" onclick="openCity(event, 'managements')">公司管理</button>
+                <button class="tablinks" onclick="openCity(event, 'stockNews')">股票新闻</button>
+                <button class="tablinks" onclick="openCity(event, 'links')">公司链接</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="basicInfo" class="tabcontent">
+                <h3></h3>
+                <p>五粮液</p>
+                <p>四川省宜宾五粮液集团有限公司（以下简称五粮液集团）是一家以酒业为主，多元化发展的大型国有企业集团。目前已形成“1+5”产业布局（酒业主业+大机械、大包装、大物流、大金融、大健康五大多元产业），拥有两家A股上市公司（000858五粮液和600793宜宾纸业），现有职工近5万人。
+
+                    五粮液集团拥有年产4万吨级的酿酒车间，拥有年产20万吨商品酒能力和60万吨原酒储存能力，是规模宏大的纯粮固态发酵白酒生产基地；拥有窖池3.2万余口，其中最古老的明初地穴式曲酒发酵窖池已持续使用650余年。五粮液产业园区规划面积18平方公里，是国家AAAA级旅游景区。2020年，五粮液集团公司实现销售收入1211亿元、利税433亿元；五粮液股份公司实现营业收入573.2亿元、增长14.4%，归属上市公司股东的净利润199.6亿元、增长14.7%。</p>
+                <p>五粮液作为浓香型白酒典型代表和行业龙头企业，从盛唐时期的重碧酒，到宋代的姚子雪曲、明初的杂粮酒，再到1909年因“集五粮之精华而成玉液”正式得名，传承逾千载。五粮液集团前身是由长发升、利川永、全恒昌、天锡福、张万和、钟三和、听月楼、刘鼎兴等8家古传酿酒作坊联营组建而成；1959年更名为四川省地方国营宜宾五粮液酒厂；1998年，改制为宜宾五粮液集团有限公司, 宜宾五粮液股份有限公司在深交所挂牌上市（股票代码000858）。从1915年远赴巴拿马万国博览会扬名至今，五粮液已先后获得国家名酒、国家金质奖章、国家质量管理奖、中国最佳诚信企业、百年世博·百年金奖等上百项国内国际荣誉。2005年，五粮液明代地穴式曲酒发酵窖古窖泥被中国国家博物馆永久收藏。2008年，五粮液酒传统酿造技艺被列入国家级非物质文化遗产。五粮液老窖池是全国重点文物保护单位和国家工业遗产。2020年，五粮液品牌位居“全球品牌价值500强”第79位、“亚洲品牌500强”第37位、“中国品牌价值100强”第3位。</p> 
+            </div>
+
+            <div id="charts" class="tabcontent">
+                <nav id="navbar">
+                    <ul>
+                        <li><a class="nav-link" href="#profit">净利润</a></li>
+                        <li><a class="nav-link" href="#revenue">营收</a></li>
+                        <li><a class="nav-link" href="#profitWithoutEx">净利润 vs. 扣非净利润</a></li>
+                        <li><a class="nav-link" href="#gross">营收 vs. 毛利 vs. 营业利润</a></li>
+                        <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
+                        <li><a class="nav-link" href="#FCF">自由现金流</a></li>
+                        <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
+                        <li><a class="nav-link" href="#balance_detailed">资产负债表分解</a></li>
+
+                    </ul>
+                </nav>
+                <div>                        
+                    <div class="explanation" id='profitHover'><u><a href="">净利润如何计算？</a></u></div>
+                    <canvas id="profit" width="800" height="700"></canvas>
+                </div>
+                <div>
+                    <canvas id="revenue" width="800" height="700"></canvas>
+                </div>
+                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
+                <div><canvas id="gross" width="800" height="700"></canvas></div>
+                <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
+                <div><canvas id="FCF" width="800" height="700"></canvas></div>
+                <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
+                <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
+
+
+
+            </div>
+
+            <div id="managements" class="tabcontent">
+                <h3>五粮液</h3>
+            </div>
+
+            <div id="stockNews" class="tabcontent">
+                <h3>买到就是赚到别买了吧</h3>
+            </div>
+
+            <div id="links" class="tabcontent">
+                <h3><u><a href='https://www.wuliangye.com.cn/'>五粮液</a></u></h3>
+            </div>
+        </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> <!--import chart.js-->
+    <script src="/js/alasql.min.js"></script>       <!--import alasql.js-->
+	<script src="/js/xlsx.core.min.js"></script>    <!--import xlsx.core.js-->	
+    <script src="/js/popper.js"></script>            <!--import popper.js-->
+    <script src="/js/jquery.min.js"></script>       <!--import jQuery-->
+    <script src="/js/bootstrap.min.js"></script>     <!--import bootstrap.js-->
+    <script src="/js/wuliangye.js"></script>           <!--import maotai.js-->
+    <script src="/js/yyz.js"></script>           <!--import maotai.js-->
+
+
+</body>
+
+
+
+</html>
