@@ -25,7 +25,7 @@ def earning_report(ctx, company, date):
 @click.pass_obj
 def security_report(ctx, company, date, security_code):
     ctx.get_report_by_security(company, date.strftime("%Y-%m-%d"), security_code)
-    # ctx.write_details(company)
+    ctx.write_details(company)
 
 
 if __name__ == "__main__":
