@@ -1,6 +1,7 @@
 from collections import defaultdict
 import json
 from json.decoder import JSONDecodeError
+import os
 from os import path
 import re
 from typing import Any, Dict
@@ -19,6 +20,8 @@ class ReportScraper:
         self.cached_reports = self._load_cache("earning_reports.json")
 
     def _load_cache(self, fname: str):
+        if not path.exists(CACHE_DIR):
+            os.mkdir(CACHE_DIR)
         cache_path = path.join(CACHE_DIR, fname)
         mode = "r" if path.exists(cache_path) else "w"
         with open(path.join(CACHE_DIR, fname), mode) as fr:
@@ -75,27 +78,23 @@ class ReportScraper:
         detailed_report = self._load_cache(fname)
         # write results as csv, unless xlsx format is required
         with open(path.join(OUTPUT_DIR, company_name + ".csv"), "w") as fw:
-            fw.write(",".join([str(i + 1) for i in range(30)]))
-            fw.write("\n")
             for k, title in Constants.exported_excel_block_name_map.items():
                 fw.write(",".join([title, *detailed_report.keys()]))
                 fw.write("\n")
                 for indx, output_name in Constants.exported_excel_indx_map[k].items():
                     line = [output_name]
                     for date, reports in detailed_report.items():
-                        val = "#REF!"  # seems to be the null val for excels
+                        val = ""
                         for report in reports:
                             if indx in report:
                                 val = report[indx]
                                 break
                         if (
-                            val == "#REF!"
+                            val == ""
                             and date in self.cached_reports
                             and company_name in self.cached_reports[date]
                         ):
-                            val = self.cached_reports[date][company_name].get(
-                                indx, "#REF!"
-                            )
+                            val = self.cached_reports[date][company_name].get(indx, "")
                         line.append(str(val))
                     fw.write(",".join(line))
                     fw.write("\n")
