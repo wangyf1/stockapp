@@ -129,3 +129,7 @@ ejs2html({
   path: `${__dirname}/views/changchun.ejs`,
   outPath: `${__dirname}/public/changchun.html`
 });
+ejs2html({
+  path: `${__dirname}/views/zhaoyi.ejs`,
+  outPath: `${__dirname}/public/zhaoyi.html`
+});

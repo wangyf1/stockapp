@@ -119,6 +119,10 @@ app.get('/changchun', (req, res) => {
   res.render('changchun');
 });
 
+app.get('/zhaoyi', (req, res) => {
+  res.render('zhaoyi');
+});
+
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded());
