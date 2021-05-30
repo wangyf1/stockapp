@@ -16,6 +16,7 @@
         "express": "^4.17.1",
         "html-to-react": "^1.4.5",
         "http-server": "*",
+        "js-yaml": "^4.1.0",
         "mongoose": "^5.11.18",
         "node-pre-gyp": "^0.17.0",
         "serverless-http": "^2.7.0"

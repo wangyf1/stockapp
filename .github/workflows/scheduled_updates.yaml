@@ -1,0 +1,17 @@
+name: Scheduled update on earning reports on next day
+
+on:
+  schedule:
+    - cron: '0 0 1 1,4,7,10 *'  # run on the day after reports are available
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update earnings reports
+        uses: actions/setup-node@v1
+        with:
+          node-version: 15.x
+      - run: npm ci
+      - run: node init_db.js
