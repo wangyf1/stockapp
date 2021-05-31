@@ -23,12 +23,20 @@
 //   console.log(`Example app listening at http://localhost:${port}`)
 // })
 
+
 // Load Node modules
 var express = require('express');
 const router = express.Router();
 const serverless = require('serverless-http');
-
 const ejs = require('ejs');
+const fs = require('fs');
+const MongoClient = require('mongodb').MongoClient;
+
+const uri = "mongodb+srv://niubi:123@cluster0.lfrkz.mongodb.net/niubi?retryWrites=true&w=majority";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const collections = ["balance", "cashflow", "cpd", "income"]
+
+
 // Initialise Express
 var app = express();
 // Render static files
@@ -49,6 +57,43 @@ app.use("/excel", express.static(__dirname + "/excel"));
 app.use("/data", express.static(__dirname + "/data-scraper/bbb_data/output"));
 
 console.log('Example app listening at http://localhost:8080');
+
+app.get("/graph", async (req, res) => {
+  const code = String(req.query.code).padStart(6, "0")
+  let data = {}
+  const schema = JSON.parse(fs.readFileSync('./config/schema.json'))
+  try {
+    for (const cname of collections) {
+      const collection = client.db("niubi").collection(cname)
+      const cursor = collection.aggregate([
+        { $match: { SECURITY_CODE: code } },
+        { $sort: { REPORT_DATE: 1 } },
+      ])
+      while (await cursor.hasNext()) {
+        const nxt = await cursor.next()
+        for (k in schema[cname]) {
+          if (!(schema[cname][k] in data)) {
+            data[schema[cname][k]] = new Array()
+          }
+          data[schema[cname][k]].push(nxt[k])
+        }
+      }
+    }
+  } catch (e) {
+    console.error(e)
+  }
+
+  if (Object.getOwnPropertyNames(data).length === 0) {  // stupid ass js bullshit ¯\_(ツ)_/¯
+    console.log(`No data available for ${code}`)
+    res.render("404", {})
+  } else {
+    res.render("graph", {
+      data: data
+    })
+  }
+})
+
+
 app.get('/about', (req, res) => {
   res.render('about');
 });
@@ -133,9 +178,6 @@ app.post('/updatestate', (req, res) => {
 });
 
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://niubi:123@cluster0.lfrkz.mongodb.net/niubi?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 client.connect(err => {
   const collection = client.db("niubi").collection("email");
   // perform actions on the collection object

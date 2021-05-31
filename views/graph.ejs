@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        <%=data.股票简称[1]%>
+    </title>
+        <meta charset="utf-8" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
+            rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/style.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+        <script src="/js/popper.js"></script>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/yyz.js"></script>
+</head>
+
+<body>
+    <div class="wrapper d-flex align-items-stretch">
+        <nav id="sidebar">
+            <%- include('sidebar.ejs') %>
+        </nav>
+        <!-- Page Content  -->
+
+        <!--term explanation-->
+        <div id='profitDescription' class="moving-div">profit = revenue - Expense</div>
+
+        <div id="content">
+            <!-- Tab links -->
+            <div class="tab">
+                <a href="/"><button class="tablinks">返回主页</button></a>
+                <button class="tablinks" onclick="openCity(event, 'basicInfo')">公司信息</button>
+                <button class="tablinks" onclick="openCity(event, 'charts')" id="defaultOpen">公司图表</button>
+                <button class="tablinks" onclick="openCity(event, 'managements')">公司管理</button>
+                <button class="tablinks" onclick="openCity(event, 'stockNews')">股票新闻</button>
+                <button class="tablinks" onclick="openCity(event, 'links')">公司链接</button>
+            </div>
+
+            <!-- Tab content -->
+            <div id="basicInfo" class="tabcontent">
+                BasicInfo
+            </div>
+
+            <div id="charts" class="tabcontent">
+                <nav id="navbar">
+                    <ul>
+                        <li><a class="nav-link" href="#profit">净利润 <u>(净利润计算公式)</u></a></li>
+                        <li><a class="nav-link" href="#revenue">营收</a></li>
+                        <li><a class="nav-link" href="#profitWithoutEx">净利润 vs. 扣非净利润</a></li>
+                        <li><a class="nav-link" href="#gross">营收 vs. 毛利 vs. 营业利润</a></li>
+                        <li><a class="nav-link" href="#operating_expense">营业费用分解</a></li>
+                        <li><a class="nav-link" href="#FCF">自由现金流</a></li>
+                        <li><a class="nav-link" href="#cash_flow">现金流分解</a></li>
+                        <li><a class="nav-link" href="#balance_detailed">资产负债表分解</a></li>
+                    </ul>
+                </nav>
+                <h1 style="padding-left: 2%;"><%=data.股票简称[1]%></h1>
+                <div>
+                    <canvas id="profit" width="800" height="700"></canvas>
+                </div>
+                <div>
+                    <canvas id="revenue" width="800" height="700"></canvas>
+                </div>
+                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
+                <div><canvas id="gross" width="800" height="700"></canvas></div>
+                <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
+                <div><canvas id="FCF" width="800" height="700"></canvas></div>
+                <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
+                <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
+            </div>
+
+            <div id="managements" class="tabcontent">
+                <h3>Managements</h3>
+            </div>
+
+            <div id="stockNews" class="tabcontent">
+                <h3>News</h3>
+            </div>
+
+            <div id="links" class="tabcontent">
+                <h3>Links</h3>
+            </div>
+        </div>
+
+        <script>
+            //Chart: Profit
+            document.getElementById("defaultOpen").click();
+            new Chart(document.getElementById('profit'), {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            label: "净利润（亿元）",
+                            backgroundColor: 'rgba(0, 102, 255, 1)',
+                            borderColor: 'rgba(0, 102, 255,1)',
+                            data: <%- JSON.stringify(data.净利润 || []) %>
+                        }
+
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '净利润（亿元）'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true,
+                            },
+                        }]
+                    }
+                }
+            });
+            //Chart: Revenue
+            new Chart(document.getElementById('revenue'), {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            label: "营业总收入（亿元）",
+                            backgroundColor: 'rgba(0, 102, 255, 1)',
+                            borderColor: 'rgba(0, 102, 255,1)',
+                            data: <%- JSON.stringify(data.营业总收入 || []) %>
+                        },
+
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '营业总收入（亿元）'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            stacked: true
+                        }]
+                    }
+                }
+            });
+
+            //Profit vs. Profit without Extraordinary items
+            var ctx = document.getElementById('profitWithoutEx'); //扣非净利润 vs. 净利润
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            label: "扣非净利润（亿元）",
+                            backgroundColor: 'rgba(0, 102, 255, 1)',
+                            borderColor: 'rgba(0, 102, 255,1)',
+                            data: <%- JSON.stringify(data.扣非净利润 || []) %>
+                        },
+                        {
+                            label: "净利润（亿元）",
+                            backgroundColor: 'rgba(255, 51, 0, 0.7)',
+                            borderColor: 'rgba(255, 51, 0, 0.7)',
+                            data: <%- JSON.stringify(data.净利润 || []) %>
+                        }
+
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '扣非净利润 vs. 净利润（亿元）'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                        }]
+                    }
+                }
+            });
+
+            //营业总收入 vs. 毛利 vs. 营业利润
+            var ctx = document.getElementById('gross'); //营业总收入 vs. 毛利 vs. 营业利润
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            label: "营业总收入（亿元）",
+                            backgroundColor: 'rgba(0, 102, 255, 1)',
+                            borderColor: 'rgba(0, 102, 255,1)',
+                            data: <%- JSON.stringify(data.营业总收入 || []) %>
+                        },
+                        {
+                            label: "毛利（亿元）",
+                            backgroundColor: 'rgba(255, 51, 0, 0.7)',
+                            borderColor: 'rgba(255, 51, 0, 0.7)',
+                            data: <%- JSON.stringify(data.毛利 || []) %>
+                        },
+                        {
+                            label: "营业利润（亿元）",
+                            backgroundColor: 'rgba(0, 151, 0, 0.7)',
+                            borderColor: 'rgba(0, 151, 0, 0.7)',
+                            data: <%- JSON.stringify(data.营业利润 || []) %>
+                        }
+
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '营业总收入 vs. 毛利 vs. 营业利润（亿元）'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                        }]
+                    }
+                }
+            });
+
+            //营业费用分解
+            var ctx = document.getElementById('operating_expense'); // Operating Expense Breakdown
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            label: "销售费用（亿元）",
+                            backgroundColor: 'rgba(0, 102, 255, 1)',
+                            borderColor: 'rgba(0, 102, 255,1)',
+                            data: <%- JSON.stringify(data.销售费用 || []) %>
+                        },
+                        {
+                            label: "管理费用（亿元）",
+                            backgroundColor: 'rgba(75, 192, 192, 1)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            data: <%- JSON.stringify(data.管理费用 || []) %>
+                        },
+                        {
+                            label: "研发费用（亿元）",
+                            backgroundColor: 'rgba(255, 206, 86, 1)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
+                            data: <%- JSON.stringify(data.研发费用 || []) %>
+                        },
+                        {
+                            label: "财务费用（亿元）",
+                            backgroundColor: 'rgba(255, 51, 0, 1)',
+                            borderColor: 'rgba(255, 51, 0, 1)',
+                            data: <%- JSON.stringify(data.财务费用 || []) %>
+                        }
+
+                    ]
+                },
+                options: {
+                    tooltips: {
+                        mode: 'index',
+                        callbacks: {
+                            footer: (tooltipItems, data) => {
+                                let total = tooltipItems.reduce((a, e) => a + parseFloat(e.yLabel), 0);
+                                return '总营业费用（亿元）: ' + total.toFixed(2);
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: '营业费用分类（亿元）'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                            stacked: true
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                            stacked: true
+                        }]
+                    }
+                }
+            });
+
+            //Free cash flow vs. capEx vs. Operating Cash flow
+            var ctx = document.getElementById('FCF');  //自由现金流 vs. 资本性支出 vs. 经营现金流
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            label: "经营活动现金流（亿元）",
+                            backgroundColor: 'rgba(0, 102, 255, 1)',
+                            borderColor: 'rgba(0, 102, 255,1)',
+                            data: <%- JSON.stringify(data.经营活动现金流 || []) %>
+                        },
+                        {
+                            label: "资本性支出（亿元）",
+                            backgroundColor: 'rgba(255, 51, 0, 0.7)',
+                            borderColor: 'rgba(255, 51, 0, 0.7)',
+                            data: <%- JSON.stringify(data.资本性支出 || []) %>
+                        },
+                        {
+                            label: "自由现金流（亿元）",
+                            backgroundColor: 'rgba(0, 151, 0, 0.7)',
+                            borderColor: 'rgba(0, 151, 0, 0.7)',
+                            data: <%- JSON.stringify(data.自由现金流 || [])%>
+                        }
+
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '自由现金流 vs. 资本性支出 vs. 经营现金流 (亿元)'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                        }]
+                    }
+                }
+            });
+
+            //现金流来源对比
+            var ctx = document.getElementById('cash_flow'); //现金流来源对比
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            label: "经营活动现金流（亿元）",
+                            backgroundColor: 'rgba(0, 102, 255, 1)',
+                            borderColor: 'rgba(0, 102, 255,1)',
+                            data: <%- JSON.stringify(data.经营活动现金流 || []) %>
+                        },
+                        {
+                            label: "投资活动现金流（亿元）",
+                            backgroundColor: 'rgba(255, 51, 0, 0.7)',
+                            borderColor: 'rgba(255, 51, 0, 0.7)',
+                            data: <%- JSON.stringify(data.投资活动现金流 || []) %>
+                        },
+                        {
+                            label: "筹资活动现金流（亿元）",
+                            backgroundColor: 'rgba(0, 151, 0, 0.7)',
+                            borderColor: 'rgba(0, 151, 0, 0.7)',
+                            data: <%- JSON.stringify(data.筹资活动现金流 || []) %>
+                        }
+
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '现金流来源对比（亿元）'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                            },
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                        }]
+                    }
+                }
+            });
+
+
+            //资产负债明细
+            var ctx = document.getElementById('balance_detailed'); //资产负债（流动非流动）
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: "股东权益（亿元）",
+                            borderColor: 'rgba(75, 204, 230,1)',
+                            backgroundColor: 'rgba(75, 204, 230,0)',
+                            borderwidth: 2,
+                            data: <%- JSON.stringify(data.股东权益 || []) %>
+                        },
+                        {
+                            type: 'bar',
+                            label: "流动资产 （亿元）",
+                            stack: 'stack0',
+                            backgroundColor: 'rgba(0, 151, 0, 0.7)',
+                            borderColor: 'rgba(0, 151, 0, 0.7)',
+                            data: <%- JSON.stringify(data.流动资产 || []) %>
+                        },
+                        {
+                            type: 'bar',
+                            label: "非流动资产 （亿元）",
+                            stack: 'stack0',
+                            backgroundColor: 'rgba(224, 30, 30, 0.7)',
+                            borderColor: 'rgba(224, 30, 30, 0.7)',
+                            data: <%- JSON.stringify(data.非流动资产 || []) %>
+                        },
+
+                        {
+                            type: 'bar',
+                            label: "流动负债 （亿元）",
+                            stack: 'stack1',
+                            backgroundColor: 'rgba(233, 141, 36, 0.7)',
+                            borderColor: 'rgba(233, 141, 36, 0.7)',
+                            data: <%- JSON.stringify(data.流动负债 || []) %>
+                        },
+                        {
+                            type: 'bar',
+                            label: "非流动负债 （亿元）",
+                            stack: 'stack1',
+                            backgroundColor: 'rgba(0, 51, 200, 0.7)',
+                            borderColor: 'rgba(0, 51, 200, 0.7)',
+                            data: <%- JSON.stringify(data.非流动负债 || []) %>
+                        }
+                    ]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: '资产负债情况'
+                    },
+                    responsive: false,
+                    scales: {
+                        xAxes: [{
+                        }],
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            },
+                        }]
+                    }
+                }
+            });
+        </script>
+</body>
+
+</html>
