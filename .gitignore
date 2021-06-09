@@ -2,4 +2,6 @@
 npm-debug.log
 .DS_Store
 /*.env
-/data-scraper/env
+/public
+!/public/google0f939a9848cd38f6.html
+!/public/test.txt

@@ -57,7 +57,7 @@
 					<% for( let i = 0; i < data.length; i++ ) { %>
                     <tr>
                         <td>
-                            <a href="/graph?code=<%= data[i].SECURITY_CODE %>"><%= data[i].SECURITY_NAME_ABBR %> </a>
+                            <a href="/<%= data[i].PINYIN %>"><%= data[i].SECURITY_NAME_ABBR %> </a>
                             <span> (股市代码: <%= data[i].SECURITY_CODE %>)</span>
                         </td>
                         <td id='tb-date'><%= data[i].REPORT_DATE %></td> 

@@ -20,6 +20,7 @@
         "mongoose": "^5.11.18",
         "node-pre-gyp": "^0.17.0",
         "nodemon": "^2.0.7",
+        "pinyin": "^2.10.2",
         "serverless-http": "^2.7.0"
     }
 }
