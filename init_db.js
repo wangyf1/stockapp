@@ -258,7 +258,7 @@ async function main() {
   try {
     await client.connect()
     await initDB(client)
-    // await initf10DB(client)
+    await initf10DB(client)
   } finally {
     /**
      * FIXME: so ... somehow client.close() is always executed before
