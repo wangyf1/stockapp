@@ -34,7 +34,11 @@ const MongoClient = require('mongodb').MongoClient;
 
 const uri = "mongodb+srv://niubi:123@cluster0.lfrkz.mongodb.net/niubi?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const collections = ["balance", "cashflow", "cpd", "income"]
+const collections = [
+  ["f10", "balance"],
+  ["f10", "cashflow"],
+  ["f10", "income"],
+]
 
 
 // Initialise Express
@@ -60,37 +64,94 @@ app.use("/data", express.static(__dirname + "/data-scraper/bbb_data/output"));
 
 console.log('Example app listening at http://localhost:8080');
 
+const schema = JSON.parse(fs.readFileSync('./config/schema.json'))["f10"]
+
+app.get("/dev_index", async (req, res) => {
+  try {
+    const cursor = client.db("niubi").collection("cpd").aggregate([{
+      $group: {
+        _id: "$SECURITY_CODE",
+        REPORT_DATE: { $max: { $substr:["$REPORT_DATE", 0, 10] } },
+        SECURITY_NAME_ABBR: { $first: "$SECURITY_NAME_ABBR" },
+        SECURITY_CODE: { $max: "$SECURITY_CODE" },
+      }
+    }])
+    const companies = new Array()
+    while (await cursor.hasNext()) {
+      const nxt = await cursor.next()
+      companies.push(nxt)
+    }
+    res.render("dev_index", {data: companies})
+  } catch (e) {
+    console.error(e)
+    res.render("error", { error_code: "500", error_msg: "Internal Server Error" })
+  }
+})
+
+
 app.get("/graph", async (req, res) => {
   const code = String(req.query.code).padStart(6, "0")
   let data = {}
-  const schema = JSON.parse(fs.readFileSync('./config/schema.json'))
+  let parsedData = new Map()
+  let dates = new Set()
+  let companyName = ""
   try {
-    for (const cname of collections) {
-      const collection = client.db("niubi").collection(cname)
+    for (const [_, e] of collections.entries()) {
+      const dbname = e[0]
+      const cname = e[1]
+      const collection = client.db(dbname).collection(cname)
       const cursor = collection.aggregate([
         { $match: { SECURITY_CODE: code } },
         { $sort: { REPORT_DATE: 1 } },
       ])
       while (await cursor.hasNext()) {
         const nxt = await cursor.next()
-        for (k in schema[cname]) {
-          if (!(schema[cname][k] in data)) {
-            data[schema[cname][k]] = new Array()
+        companyName = nxt["SECURITY_NAME_ABBR"]
+        const reportDate = nxt["REPORT_DATE"].substr(0, 10)
+        dates.add(reportDate)
+        for (const k in schema) {
+          if (!(k in nxt)) {
+            continue
           }
-          data[schema[cname][k]].push(nxt[k])
+          if (!(schema[k] in data)) {
+            data[schema[k]] = new Map()
+          }
+          data[schema[k]][reportDate] = nxt[k]
         }
       }
     }
+
+    for (const k in data) {
+      for (const d of dates) {
+        if (!(k in parsedData)) {
+          parsedData[k] = new Array()
+        }
+        val = data[k][d] || 0
+        parsedData[k].push((val / 100000000).toFixed(2))
+      }
+    }
+
+    try {
+      let totalIncome = parsedData["营业总收入"] || parsedData["营业收入"]
+      let totalCost = parsedData["营业总成本"] || parsedData["营业支出"]
+      parsedData["毛利"] = totalIncome.map((e, i) => ((e - totalCost[i]).toFixed(2)))
+      parsedData["自由现金流"] = parsedData["经营活动产生的现金流量净额"].map((e, i) => ((e - parsedData["资本性支出"][i]).toFixed(2)))
+    } catch (e) {
+      console.log(`Incomplete data for ${companyName} (${code})`)
+    }
   } catch (e) {
     console.error(e)
+    res.render("error", { error_code: "500", error_msg: "Internal Server Error" })
   }
 
   if (Object.getOwnPropertyNames(data).length === 0) {  // stupid ass js bullshit ¯\_(ツ)_/¯
     console.log(`No data available for ${code}`)
-    res.render("404", {})
+    res.render("error", { error_code: "404", error_msg: "您所查找的股票不存在" })
   } else {
     res.render("graph", {
-      data: data
+      "data": parsedData,
+      "cname": companyName,
+      "dates": JSON.stringify(Array.from(dates)),
     })
   }
 })

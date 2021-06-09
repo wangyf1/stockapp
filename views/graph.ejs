@@ -3,7 +3,7 @@
 
 <head>
     <title>
-        <%=data.股票简称[1]%>
+        <%=cname%>
     </title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
@@ -56,7 +56,7 @@
                         <li><a class="nav-link" href="#balance_detailed">资产负债表分解</a></li>
                     </ul>
                 </nav>
-                <h1 style="padding-left: 2%;"><%=data.股票简称[1]%></h1>
+                <h1 style="padding-left: 2%;"><%=cname%></h1>
                 <div>
                     <canvas id="profit" width="800" height="700"></canvas>
                 </div>
@@ -90,7 +90,7 @@
             new Chart(document.getElementById('profit'), {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             label: "净利润（亿元）",
@@ -125,13 +125,13 @@
             new Chart(document.getElementById('revenue'), {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             label: "营业总收入（亿元）",
                             backgroundColor: 'rgba(0, 102, 255, 1)',
                             borderColor: 'rgba(0, 102, 255,1)',
-                            data: <%- JSON.stringify(data.营业总收入 || []) %>
+                            data: <%- JSON.stringify(data.营业总收入 || data.营业收入 || []) %>
                         },
 
                     ]
@@ -161,13 +161,13 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             label: "扣非净利润（亿元）",
                             backgroundColor: 'rgba(0, 102, 255, 1)',
                             borderColor: 'rgba(0, 102, 255,1)',
-                            data: <%- JSON.stringify(data.扣非净利润 || []) %>
+                            data: <%- JSON.stringify(data.扣除非经常性损益后的净利润 || []) %>
                         },
                         {
                             label: "净利润（亿元）",
@@ -201,13 +201,13 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             label: "营业总收入（亿元）",
                             backgroundColor: 'rgba(0, 102, 255, 1)',
                             borderColor: 'rgba(0, 102, 255,1)',
-                            data: <%- JSON.stringify(data.营业总收入 || []) %>
+                            data: <%- JSON.stringify(data.营业总收入 || data.营业收入 || []) %>
                         },
                         {
                             label: "毛利（亿元）",
@@ -247,7 +247,7 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             label: "销售费用（亿元）",
@@ -310,13 +310,13 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             label: "经营活动现金流（亿元）",
                             backgroundColor: 'rgba(0, 102, 255, 1)',
                             borderColor: 'rgba(0, 102, 255,1)',
-                            data: <%- JSON.stringify(data.经营活动现金流 || []) %>
+                            data: <%- JSON.stringify(data.经营活动产生的现金流量净额 || []) %>
                         },
                         {
                             label: "资本性支出（亿元）",
@@ -356,25 +356,25 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             label: "经营活动现金流（亿元）",
                             backgroundColor: 'rgba(0, 102, 255, 1)',
                             borderColor: 'rgba(0, 102, 255,1)',
-                            data: <%- JSON.stringify(data.经营活动现金流 || []) %>
+                            data: <%- JSON.stringify(data.经营活动产生的现金流量净额 || []) %>
                         },
                         {
                             label: "投资活动现金流（亿元）",
                             backgroundColor: 'rgba(255, 51, 0, 0.7)',
                             borderColor: 'rgba(255, 51, 0, 0.7)',
-                            data: <%- JSON.stringify(data.投资活动现金流 || []) %>
+                            data: <%- JSON.stringify(data.投资活动产生的现金流量净额 || []) %>
                         },
                         {
                             label: "筹资活动现金流（亿元）",
                             backgroundColor: 'rgba(0, 151, 0, 0.7)',
                             borderColor: 'rgba(0, 151, 0, 0.7)',
-                            data: <%- JSON.stringify(data.筹资活动现金流 || []) %>
+                            data: <%- JSON.stringify(data.筹资活动产生的现金流量净额 || []) %>
                         }
 
                     ]
@@ -405,7 +405,7 @@
             var myChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: <%- JSON.stringify(data.报告日期.map(x => x.substr(0, 10))) %>,
+                    labels: <%- dates %>,
                     datasets: [
                         {
                             type: 'line',
@@ -421,7 +421,7 @@
                             stack: 'stack0',
                             backgroundColor: 'rgba(0, 151, 0, 0.7)',
                             borderColor: 'rgba(0, 151, 0, 0.7)',
-                            data: <%- JSON.stringify(data.流动资产 || []) %>
+                            data: <%- JSON.stringify(data.总流动资产 || []) %>
                         },
                         {
                             type: 'bar',
@@ -429,7 +429,7 @@
                             stack: 'stack0',
                             backgroundColor: 'rgba(224, 30, 30, 0.7)',
                             borderColor: 'rgba(224, 30, 30, 0.7)',
-                            data: <%- JSON.stringify(data.非流动资产 || []) %>
+                            data: <%- JSON.stringify(data.总非流动资产 || []) %>
                         },
 
                         {
@@ -438,7 +438,7 @@
                             stack: 'stack1',
                             backgroundColor: 'rgba(233, 141, 36, 0.7)',
                             borderColor: 'rgba(233, 141, 36, 0.7)',
-                            data: <%- JSON.stringify(data.流动负债 || []) %>
+                            data: <%- JSON.stringify(data.总流动负债 || []) %>
                         },
                         {
                             type: 'bar',
@@ -446,7 +446,7 @@
                             stack: 'stack1',
                             backgroundColor: 'rgba(0, 51, 200, 0.7)',
                             borderColor: 'rgba(0, 51, 200, 0.7)',
-                            data: <%- JSON.stringify(data.非流动负债 || []) %>
+                            data: <%- JSON.stringify(data.总非流动负债 || []) %>
                         }
                     ]
                 },

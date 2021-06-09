@@ -4,7 +4,7 @@
 <head>
 
     <title>
-        404 Not Found
+        <%=error_code%>
     </title>
 
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -24,8 +24,8 @@
             <%- include('sidebar.ejs') %>
         </nav>
         <div id="content" class="p-4 p-md-5 pt-5">
-            <h1>404 Not Found</h1>
-            <p1>您所查找的股票不存在</p1>
+            <h1><%=error_code%></h1>
+            <p1><%=error_msg%></p1>
         </div>
     </div>
 
