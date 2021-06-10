@@ -114,7 +114,7 @@ function getData(code) {
   
       try {
         let totalIncome = parsedData["营业总收入"] || parsedData["营业收入"]
-        let totalCost = parsedData["营业总成本"] || parsedData["营业支出"]
+        let totalCost = parsedData["营业成本"] || parsedData["营业支出"]
         parsedData["毛利"] = totalIncome.map((e, i) => ((e - totalCost[i]).toFixed(2)))
         parsedData["自由现金流"] = parsedData["经营活动产生的现金流量净额"].map((e, i) => ((e - parsedData["资本性支出"][i]).toFixed(2)))
       } catch (e) {
