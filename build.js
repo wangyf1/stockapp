@@ -56,9 +56,16 @@ function getIndex() {
           nxt["SECURITY_NAME_ABBR"],
           { style: pinyin.STYLE_NORMAL, heteronym: false }
         ).flat().join("") + nxt["SECURITY_CODE"].replace(".", "") + ".html"
+        const ccursor = db.query(client, "f10", "cashflow", [
+          { $match: { SECURITY_CODE: nxt["SECURITY_CODE"] } },
+          { $sort: { REPORT_DATE: -1 } },
+          { $limit: 1 },
+        ])
+        const ccres = await ccursor.next()
+        nxt["REPORT_DATE_NAME"] = ccres["REPORT_DATE_NAME"]
         companies.push(nxt)
       }
-      return {"data": companies}
+      return { "data": companies }
     } catch (e) {
       console.error(e)
     }
@@ -108,9 +115,20 @@ function getData(code) {
             data[schema[k]][reportDate] = nxt[k]
           }
         }
+        const ccursor = db.query(client, "niubi", "companies", [
+          { $match: { SECURITY_CODE: code } },
+          {
+            $group: {
+              _id: "$SECURITY_CODE",
+              BASIC_INFO: { $first: "$BASIC_INFO" },
+            }
+          }
+        ])
+        const res = await ccursor.next()
+        companyInfo = res["BASIC_INFO"]
       }
-  
-      dates = Array.from(dates).sort()
+
+      dates = Array.from(dates).sort().slice(-20)  // 5 most recent quarters
       for (const k in data) {
         for (const d of dates) {
           if (!(k in parsedData)) {
@@ -120,7 +138,7 @@ function getData(code) {
           parsedData[k].push((val / 100000000).toFixed(2))
         }
       }
-  
+
       try {
         let totalIncome = parsedData["营业总收入"] || parsedData["营业收入"]
         let totalCost = parsedData["营业成本"] || parsedData["营业支出"]
@@ -132,7 +150,7 @@ function getData(code) {
     } catch (e) {
       console.error(e)
     }
-  
+
     if (Object.getOwnPropertyNames(data).length === 0) {  // stupid ass js bullshit ¯\_(ツ)_/¯
       console.log(`No data available for ${code}`)
     } else {
@@ -160,9 +178,9 @@ function getData(code) {
 
     for (const [_, c] of Object.entries(companies)) {
       const py = pinyin(c["name"], {
-      style: pinyin.STYLE_NORMAL,
-      heteronym: false
-    }).flat().join("") + String(c["code"].replace(".", "")).padStart(6, "0")
+        style: pinyin.STYLE_NORMAL,
+        heteronym: false
+      }).flat().join("") + String(c["code"].replace(".", "")).padStart(6, "0")
       const graphData = await getData(c["code"])
       console.log("Rendering for", c["name"], Object.keys(graphData))
       ejs2html({
@@ -176,7 +194,7 @@ function getData(code) {
   } finally {
     await client.close()
   }
-}) ()
+})()
 
 
 ejs2html({

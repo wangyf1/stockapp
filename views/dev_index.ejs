@@ -51,7 +51,7 @@
 							<div class="responsive">现有财报数据公司 （持续更新中）</div>
 						</th>
 						<th class="responsive" onclick="sortTable(1)" onMouseOver="this.style.cursor='pointer'">
-							<div class="responsive">最近更新日期</div>
+							<div class="responsive">最新财报</div>
 						</th>
 					</tr>
 					<% for( let i = 0; i < data.length; i++ ) { %>
@@ -60,7 +60,7 @@
                             <a href="/<%= data[i].PINYIN %>"><%= data[i].SECURITY_NAME_ABBR %> </a>
                             <span> (股市代码: <%= data[i].SECURITY_CODE %>)</span>
                         </td>
-                        <td id='tb-date'><%= data[i].REPORT_DATE %></td> 
+                        <td id='tb-date'><%= data[i].REPORT_DATE_NAME %></td> 
                     </tr>
                     <% } %>
 				</table>
