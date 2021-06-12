@@ -40,7 +40,7 @@
 
             <!-- Tab content -->
             <div id="basicInfo" class="tabcontent">
-                BasicInfo
+                <%-cinfo%>
             </div>
 
             <div id="charts" class="tabcontent">
@@ -173,7 +173,7 @@
                             label: "净利润（亿元）",
                             backgroundColor: 'rgba(255, 51, 0, 0.7)',
                             borderColor: 'rgba(255, 51, 0, 0.7)',
-                            data: <%- JSON.stringify(data.净利润 || []) %>
+                            data: <%- JSON.stringify(data.归属于母公司股东的净利润 || []) %>
                         }
 
                     ]

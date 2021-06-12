@@ -3,10 +3,9 @@ const path = require("path");
 const ejs = require("ejs");
 const yaml = require("js-yaml")
 const pinyin = require("pinyin")
-const MongoClient = require('mongodb').MongoClient;
+const db = require("./apis/database")
 
-const uri = "mongodb+srv://niubi:123@cluster0.lfrkz.mongodb.net/niubi?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const client = db.getClient()
 const collections = [
   ["f10", "balance"],
   ["f10", "cashflow"],
@@ -42,7 +41,7 @@ function ejs2html({ path, outPath, data, options }) {
 function getIndex() {
   async function run() {
     try {
-      const cursor = client.db("niubi").collection("cpd").aggregate([{
+      const cursor = db.query(client, "niubi", "companies", [{
         $group: {
           _id: "$SECURITY_CODE",
           REPORT_DATE: { $max: { $substr: ["$REPORT_DATE", 0, 10] } },
@@ -75,12 +74,22 @@ function getData(code) {
     let parsedData = new Map()
     let dates = new Set()
     let companyName = ""
+    const cursor = db.query(client, "niubi", "companies", [
+      { $match: { SECURITY_CODE: code } },
+      {
+        $group: {
+          _id: "$SECURITY_CODE",
+          BASIC_INFO: { $first: "$BASIC_INFO" },
+        }
+      }
+    ])
+    const res = await cursor.next()
+    const companyInfo = res["BASIC_INFO"]
     try {
       for (const [_, e] of collections.entries()) {
         const dbname = e[0]
         const cname = e[1]
-        const collection = client.db(dbname).collection(cname)
-        const cursor = collection.aggregate([
+        const cursor = db.query(client, dbname, cname, [
           { $match: { SECURITY_CODE: code } },
           { $sort: { REPORT_DATE: 1 } },
         ])
@@ -131,6 +140,7 @@ function getData(code) {
         "data": parsedData,
         "cname": companyName,
         "dates": JSON.stringify(dates),
+        "cinfo": companyInfo,
       }
     }
   }

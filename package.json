@@ -6,7 +6,8 @@
     },
     "scripts": {
         "start": "nodemon index.js",
-        "build": "cp -r css excel js public/ && node build.js"
+        "build": "cp -r css excel js public/ && node build.js",
+        "updatedb": "node etl.js"
     },
     "dependencies": {
         "body-parser": "^1.19.0",
