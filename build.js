@@ -115,17 +115,6 @@ function getData(code) {
             data[schema[k]][reportDate] = nxt[k]
           }
         }
-        const ccursor = db.query(client, "niubi", "companies", [
-          { $match: { SECURITY_CODE: code } },
-          {
-            $group: {
-              _id: "$SECURITY_CODE",
-              BASIC_INFO: { $first: "$BASIC_INFO" },
-            }
-          }
-        ])
-        const res = await ccursor.next()
-        companyInfo = res["BASIC_INFO"]
       }
 
       dates = Array.from(dates).sort().slice(-20)  // 5 most recent quarters
