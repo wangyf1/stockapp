@@ -78,7 +78,8 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '净利润（亿元）'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                         ticks: {
@@ -115,7 +116,8 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '营业总收入（亿元）'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                         stacked: true
@@ -157,7 +159,8 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '扣非净利润 vs. 净利润（亿元）'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                     }],
@@ -203,7 +206,8 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '营业总收入 vs. 毛利 vs. 营业利润（亿元）'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                     }],
@@ -264,7 +268,8 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '营业费用分类（亿元）'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                         stacked: true
@@ -312,7 +317,8 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '自由现金流 vs. 资本性支出 vs. 经营现金流 (亿元)'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                     }],
@@ -358,7 +364,8 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '现金流来源对比（亿元）'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                         ticks: {
@@ -429,7 +436,9 @@ alasql.promise('select * from xlsx("../excel/longji/exportedExcel.xlsx",{range:"
                     display: true,
                     text: '资产负债情况'
                 },
-                responsive: false,
+                responsive: true,
+                maintainAspectRatio: false,
+                maintainAspectRatio: false,
                 scales: {
                     xAxes: [{
                     }],

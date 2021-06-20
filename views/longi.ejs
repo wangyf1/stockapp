@@ -69,16 +69,16 @@
                     </ul>
                 </nav>
 
-                <div><canvas id="region" width="800" height="700"></canvas></div>
-                <div><canvas id="product" width="800" height="700"></canvas></div>
-                <div><canvas id="profit" width="800" height="700"></canvas></div>
-                <div><canvas id="revenue" width="800" height="700"></canvas></div>
-                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
-                <div><canvas id="gross" width="800" height="700"></canvas></div>
-                <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
-                <div><canvas id="FCF" width="800" height="700"></canvas></div>
-                <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
-                <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
+                <div class="chart-container"><canvas id="region"></canvas></div>
+                <div class="chart-container" ><canvas id="product" ></canvas></div>
+                <div class="chart-container"><canvas id="profit" ></canvas></div>
+                <div class="chart-container"><canvas id="revenue" ></canvas></div>
+                <div class="chart-container"><canvas id="profitWithoutEx" ></canvas></div>
+                <div class="chart-container"><canvas id="gross" ></canvas></div>
+                <div class="chart-container"><canvas id="operating_expense" ></canvas></div>
+                <div class="chart-container"><canvas id="FCF" ></canvas></div>
+                <div class="chart-container"><canvas id="cash_flow" ></canvas></div>
+                <div class="chart-container"><canvas id="balance_detailed"></canvas></div>
                 
 
 
@@ -161,7 +161,8 @@
                 display: true,
                 text: '年营业收入（按地区划分）（亿元）'
             },
-            responsive: false,
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 xAxes: [{
                     stacked: true
@@ -218,7 +219,8 @@
                 display: true,
                 text: '年营业收入（按不同产品划分）（亿元）'
             },
-            responsive: false,
+            responsive: true,
+            maintainAspectRatio: false,
             scales: {
                 xAxes: [{
                     stacked: true

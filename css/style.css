@@ -202,8 +202,13 @@ h1, h2, h3, h4, h5, h6 {
 canvas {
     margin:auto; 
     padding-top: 100px;
-    padding-right: 220px;
-    z-index:-1;
+    
+    z-index:0;
+  }
+  @media (min-width: 991px) {
+    canvas{
+      padding-right: 220px;
+    }
   }
 
 #navbar {
@@ -8584,6 +8589,7 @@ a[data-toggle="collapse"] {
   overflow: hidden;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
+  z-index: 2;
 }
 
 /* Style the buttons that are used to open the tab content */
@@ -8637,3 +8643,11 @@ a[data-toggle="collapse"] {
   height:50px;
   margin-left:100px;
 }
+
+.chart-container {
+  position: relative;
+  margin: auto;
+  height: 70vh;
+  width: 70vw;
+}
+
