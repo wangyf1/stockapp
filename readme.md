@@ -21,7 +21,11 @@ password: Niubi123!
         这是第二段
     ```
     - 注意每一行内容前的空格必须与以上的例子相同 ([YAML syntax guide](https://docs.ansible.com/ansible/latest/reference_appendices/YAMLSyntax.html))
-3. 在 command line / terminal 执行：
+3. 如果需要在新公司中手动加入图表
+    - 在`js`文件夹中 新建`公司拼音公司股票代码.js`文件
+    - 在新文件中输入图表代码
+    - 范例见: [ningdeshidai300750.js](js/ningdeshidai300750.js)
+4. 在 command line / terminal 执行：
     ```bash
     npm run updatedb 公司名
     ```
@@ -29,7 +33,7 @@ password: Niubi123!
     ```bash
     npm run updatedb 公司名1,公司名2,公司名3,...,公司名n
     ```
-4. 检查新公司的图表执行：
+5. 检查新公司的图表执行：
     ```
     npm run build && netlify dev
     ```

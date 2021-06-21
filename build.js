@@ -171,6 +171,13 @@ function getData(code) {
         heteronym: false
       }).flat().join("") + String(c["code"].replace(".", "")).padStart(6, "0")
       const graphData = await getData(c["code"])
+      let customJS
+      try {
+        customJS = fs.readFileSync(`${__dirname}/js/${py}.js`, "utf8")
+      } catch (error) {
+        console.log("No custom JS code found for", c["name"])
+      }
+      graphData["customJS"] = customJS
       console.log("Rendering for", c["name"], Object.keys(graphData))
       ejs2html({
         path: `${__dirname}/views/graph.ejs`,

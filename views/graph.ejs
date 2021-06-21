@@ -15,6 +15,7 @@
         <script src="/js/jquery.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
         <script src="/js/yyz.js"></script>
+        <script src="/js/load_custom.js"></script>
 </head>
 
 <body>
@@ -57,18 +58,16 @@
                     </ul>
                 </nav>
                 <h1 style="padding-left: 2%;"><%=cname%></h1>
-                <div>
-                    <canvas id="profit" width="800" height="700"></canvas>
+                <div id="canvas">
+                    <div><canvas id="profit" width="800" height="700"></canvas></div>
+                    <div><canvas id="revenue" width="800" height="700"></canvas></div>
+                    <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
+                    <div><canvas id="gross" width="800" height="700"></canvas></div>
+                    <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
+                    <div><canvas id="FCF" width="800" height="700"></canvas></div>
+                    <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
+                    <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
                 </div>
-                <div>
-                    <canvas id="revenue" width="800" height="700"></canvas>
-                </div>
-                <div><canvas id="profitWithoutEx" width="800" height="700"></canvas></div>
-                <div><canvas id="gross" width="800" height="700"></canvas></div>
-                <div><canvas id="operating_expense" width="800" height="700"></canvas></div>
-                <div><canvas id="FCF" width="800" height="700"></canvas></div>
-                <div><canvas id="cash_flow" width="800" height="700"></canvas></div>
-                <div><canvas id="balance_detailed" width="800" height="700"></canvas></div>
             </div>
 
             <div id="managements" class="tabcontent">
@@ -87,6 +86,9 @@
         <script>
             //Chart: Profit
             document.getElementById("defaultOpen").click();
+            <% if (customJS) { %>
+            <%- customJS %>
+            <% } %>
             new Chart(document.getElementById('profit'), {
                 type: 'bar',
                 data: {
