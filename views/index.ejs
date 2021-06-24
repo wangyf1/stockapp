@@ -14,15 +14,6 @@
 </head>
 
 <body>
-	<!-- 
-		<div id='moving-div-1' class="moving-div">BOE Technology Group Co., Ltd., or Jingdongfang, is a Chinese electronic components producer founded in April 1993. Its core businesses are interface devices, smart IoT systems and smart medicine and engineering integration. BOE is one of the world's largest manufacturers of LCD, OLEDs and flexible displays.</div>
-		<div id='moving-div-2' class="moving-div">隆基股份最近跌的裤衩子都没了</div>
-		<div id='moving-div-3' class="moving-div">比亚迪真牛逼</div>
-		<div id='moving-div-4' class="moving-div">贵州茅台最近暴跌</div>
-	-->
-
-	
-
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<%- include('sidebar.ejs') %>
@@ -33,7 +24,7 @@
 			
 			<!-- mobile Navigation Menu -->
 			<div class="topnav">
-				<a href="#home" class="active logo"><img style="margin-left: -10px" src="/media/logo.png" alt="简 • 财经" width='100' height='25'></a>
+				<a href="#home" class="active logo"><img style="margin-left: -10px" src="/media/old logo.png" alt="简 • 财经" width='100' height='25'></a>
 				<div id="myLinks">
 					<a href="About">About</a>
 					<a href="Knowledge">Knowledge</a>
@@ -51,7 +42,7 @@
 
 			<div id='intro-message'>
 				欢迎使用本网站，本网站还处在初期建设中，如有缺陷，敬请包涵和谅解。 如对网站有任何建议，请通过邮箱联系我们：<a
-					href="mailto: niubigupiao@gmail.com">niubigupiao@gmail.com</a>
+					href="mailto: yanyizhen1996@gmail.com">yanyizhen1996@gmail.com</a>
 			</div>
 			<div id='table-of-content'>
 				<table id="myTable">
@@ -60,130 +51,18 @@
 							<div class="responsive">现有财报数据公司 （持续更新中）</div>
 						</th>
 						<th class="responsive" onclick="sortTable(1)" onMouseOver="this.style.cursor='pointer'">
-							<div class="responsive">最近更新日期</div>
+							<div class="responsive">最新财报</div>
 						</th>
 					</tr>
-					<tr>
-						<td>
-							<a href="jdf">京东方</a>
-							<span> (股市代码: 000725.SZ)</span>
-						</td>
-						<td id='tb-date'>05/01/2021</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="longi">隆基股份</a>
-							<span> (股市代码: 601012)</span>
-						</td>
-						<td id='tb-date'>05/01/2021</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="byd">比亚迪</a>
-							<span> (股市代码: 002694)</span>
-						</td>
-						<td id='tb-date'>05/04/2021</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="maotai">贵州茅台</a>
-							<span> (股市代码: 600519)</span>
-						</td>
-						<td id='tb-date'>05/04/2021</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="yonghui">永辉超市</a>
-							<span> (股市代码: 601933)</span>
-						</td>
-						<td id='tb-date'>05/23/2021</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="pingan">中国平安</a>
-							<span> (股市代码: 601318)</span>
-						</td>
-						<td id='tb-date'>05/23/2021</td>
-
-					</tr>
-					<tr>
-						<td>
-							<a href="nanfang">南方航空</a>
-							<span> (股市代码: 600029)</span>
-						</td>
-						<td id='tb-date'>05/23/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="yiwei">亿纬锂能</a>
-							<span> (股市代码: 300014)</span>
-						</td>
-						<td id='tb-date'>05/04/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="mairui">迈瑞医疗</a>
-							<span> (股市代码: 300760)</span>
-						</td>
-						<td id='tb-date'>05/04/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="ziguang">紫光国微</a>
-							<span> (股市代码: 002049)</span>
-						</td>
-						<td id='tb-date'>05/04/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="dfyh">东方雨虹</a>
-							<span> (股市代码: 002271)</span>
-						</td>
-						<td id='tb-date'>05/04/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="ningde">宁德时代</a>
-							<span> (股市代码: 300750)</span>
-						</td>
-						<td id='tb-date'>05/04/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="wuliangye">五粮液</a>
-							<span> (股市代码: 000858)</span>
-						</td>
-						<td id='tb-date'>05/18/2021</td>
-					</tr>
-					<tr>
-						<td>
-							<a href="tianci">天赐材料</a>
-							<span> (股市代码: 002709)</span>
-						</td>
-						<td id='tb-date'>05/18/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="changchun">长春高新</a>
-							<span> (股市代码: 000661)</span>
-						</td>
-						<td id='tb-date'>05/18/2021</td>
-					</tr>
-
-					<tr>
-						<td>
-							<a href="zhaoyi">兆易创新</a>
-							<span> (股市代码: 603986)</span>
-						</td>
-						<td id='tb-date'>05/23/2021</td>
-					</tr>
+					<% for( let i = 0; i < data.length; i++ ) { %>
+                    <tr>
+                        <td>
+                            <a href="/<%= data[i].PINYIN %>"><%= data[i].SECURITY_NAME_ABBR %> </a>
+                            <span> (股市代码: <%= data[i].SECURITY_CODE %>)</span>
+                        </td>
+                        <td id='tb-date'><%= data[i].REPORT_DATE_NAME %></td> 
+                    </tr>
+                    <% } %>
 				</table>
 			</div>
 
