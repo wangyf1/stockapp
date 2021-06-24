@@ -37,11 +37,10 @@ password: Niubi123!
     ```
     npm run build && netlify dev
     ```
-    程序运行结束后进入 http://localhost:8888/dev_index 页面
-
     
-    或执行
+    或
+
     ```
     npm run build && npm start
     ```
-    程序运行结束后进入 http://localhost:8888/dev_index.html 页面
+    程序运行结束后进入 http://localhost:8888/ 页面
