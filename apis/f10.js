@@ -11,21 +11,20 @@ const reportNames = {
 
 async function getDates(client, code, collection, rtype, ctype) {
   async function parse(data) {
-    const cursor = await db.query(client, "f10", collection, [
-      {$match: { SECUCODE: code }},
-      {
-        $group: {
-          _id: "$SECURITY_CODE",
-          "REPORT_DATES": {
-            $push: {$substr: ["$REPORT_DATE", 0, 10]}
+    const dates = JSON.parse(data)["data"]
+    try{
+      const cursor = await db.query(client, "f10", collection, [
+        {$match: { SECUCODE: code }},
+        {
+          $group: {
+            _id: "$SECURITY_CODE",
+            "REPORT_DATES": {
+              $push: {$substr: ["$REPORT_DATE", 0, 10]}
+            }
           }
         }
-      }
-    ])
-    const dbDates = await cursor.next()
-
-    try {
-      const dates = JSON.parse(data)["data"]
+      ])
+      let dbDates = await cursor.next()
       const newDates = new Array()
       for (const date of dates) {
         const dateStr = date["REPORT_DATE"].substr(0, 10)
@@ -34,8 +33,9 @@ async function getDates(client, code, collection, rtype, ctype) {
         }
       }
       return newDates
-    } catch (e) {
-      console.error(`Empty response: ${data}`)
+    }
+    catch (e) {
+      return dates.map(x => (x["REPORT_DATE"]))
     }
   }
 
@@ -52,8 +52,10 @@ async function getDates(client, code, collection, rtype, ctype) {
           resolve(parse(data))
         })
       } catch (e) {
-        console.error(e)
-        console.debug(req)
+        console.log({
+          "Error getting report dates": e,
+          "Bad Request": req
+        })
       }
     })
   })
@@ -85,8 +87,11 @@ async function getData(code, dates, rtype, ctype, dtype=2) {
               console.log("No data returned for dates:", dates)
               resolve([])
             } else {
-              console.error(e)
-              console.debug(req)
+              const msg = `Error getting data for ${rtype}`
+              console.log({
+                msg: e,
+                "Bad Request": req
+              })
             }
           }
         })

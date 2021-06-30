@@ -21,10 +21,10 @@ async function insert(client, dbName, cname, data, bulkInsert = false) {
       const res = await client.db(dbName).collection(cname).insertMany(
         data, { ordered: true }
       )
-      console.debug(`${res.insertedCount} documents were inserted to ${cname}`)
+      // console.debug(`${res.insertedCount} documents were inserted to ${cname}`)
     } else {
       const res = await client.db(dbName).collection(cname).insertOne(data)
-      console.debug(`Document inserted to ${cname}`)
+      // console.debug(`Document inserted to ${cname}`)
     }
   } catch (e) {
     console.error("Insert failed due to unexpected error: ", e.message)
@@ -49,7 +49,7 @@ async function update(client, dbName, cname, filters, data, upsert = true) {
     const res = await client.db(dbName).collection(cname).updateOne(
       filters, { $set: data }, { upsert: upsert }
     )
-    console.debug(`Data has been updated for ${filters} in ${cname}`)
+    // console.debug(`Data has been updated for ${filters} in ${cname}`)
   } catch (e) {
     console.error("Update failed to update due to unexpected error: ", e)
   }

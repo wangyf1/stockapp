@@ -41,8 +41,10 @@ async function getSECU(name) {
         try {
           resolve(JSON.parse(data.replace(re, "$1"))["result"]["data"][0]["SECUCODE"])
         } catch (e) {
-          console.error(e)
-          console.log(req)
+          console.error({
+            "Error getting SECU code": e,
+            "Bad Request": req
+          })
         }
       })
     })

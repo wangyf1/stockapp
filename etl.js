@@ -19,7 +19,6 @@ async function loadF10Reports(client, dbName, secucode, bulkWrite) {
     await db.index(
       client, dbName, cname, { REPORT_DATE: -1, SECURITY_CODE: 1 }, true
     )
-    console.log(`Fetching ${cname} data for ${secucode}`)
     // try all company types until hitting the correct one
     let data
     while (ctype > 0) {
@@ -29,16 +28,15 @@ async function loadF10Reports(client, dbName, secucode, bulkWrite) {
           console.log(`No new ${cname} data found for ${secucode}`)
           break
         } else {
-          console.log("Missing data for dates", dates)
+          console.log("Getting data for dates", dates)
         }
 
-        console.debug(`Getting data for ${dates.length} quarters`)
         if (cname === "balance") {  // 负债表只有报告期数据
           data = await f10.getData(secucode, dates, rname, ctype, 1)
         } else {
           data = await f10.getData(secucode, dates, rname, ctype)
         }
-        console.debug(`${d.length} reports downloaded`)
+        console.debug(`${data.length} reports downloaded`)
         break
       } catch (e) {
         ctype --
@@ -48,7 +46,7 @@ async function loadF10Reports(client, dbName, secucode, bulkWrite) {
     }
 
     if (ctype < 0 || !data || data.length == 0) {
-      console.debug("Empty data returned", {code: secucode, companyType: ctype, data: data})
+      console.log("Empty data returned for", {code: secucode})
     } else {
       if (bulkWrite) {
         await db.insert(client, dbName, cname, data, bulkWrite)
