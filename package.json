@@ -7,6 +7,7 @@
     "scripts": {
         "start": "nodemon index.js",
         "build": "cp -r css js public/ && node build.js",
+        "build-win": "xcopy css public /E/H && xcopy js public /E/H && node build.js",
         "updatedb": "node etl.js"
     },
     "dependencies": {
