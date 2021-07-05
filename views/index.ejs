@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-	<title>简·财经 | 免费的可视化财报工具</title>
+	<title>简·财经 | 免费的A股财报分析工具</title>
 	<link href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAACgYBAAgA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARARARARARABEBEBEBEBEAEQEQEQEQEQARARARARARABEBEBEBEBEAAAEQEQEQEQIAARARARARACAAABEBEBEAAgIAEQEQEQAAICAAARARAAAAAgABEBEAAAAAIAAAEQAAAAACAgARAAAAAAAiAAAAAAAAAiIAAAAAAAAAAAAACSSQAAkkkAAJJJAACSSQAAkkkAAPJJAABySQAAvkkAANZJAADryQAA/ckAAP75AAD/WQAA/58AAP8fAAD//wAA" rel="icon" type="image/x-icon" />
 	
 	<meta charset="utf-8">
-	<meta name="description" content="简财经，简单易读的A股财报 - 免费 & 交互式 & 可视化的财报工具">
+	<meta name="description" content="简单易读的A股财报 - 免费 & 交互式 & 可视化的财报工具">
 	<meta name="keywords" content="A股,财报,交互式,可视化,免费,交互式财报,可视化财报,财报工具">
 	<meta name="author" content="oqh,yyz,wyf,wgj">
 	
@@ -48,7 +48,7 @@
 
 			<div id='intro-message'>
 				欢迎使用本网站，本网站还处在初期建设中，如有缺陷，敬请包涵和谅解。 如对网站有任何建议，请通过邮箱联系我们：<a
-					href="mailto: yanyizhen1996@gmail.com">yanyizhen1996@gmail.com</a>
+					href="mailto: niubigupiao@gmail.com">niubigupiao@gmail.com</a>
 			</div>
 			<div id='table-of-content'>
 				<table id="myTable">
@@ -57,8 +57,9 @@
 							<div class="responsive">现有财报数据公司 （持续更新中）</div>
 						</th>
 						<th class="responsive" onclick="sortTable(1)" onMouseOver="this.style.cursor='pointer'">
-							<div class="responsive">最新财报</div>
+							<div class="responsive">最近更新财报</div>
 						</th>
+						
 					</tr>
 					<% for( let i = 0; i < data.length; i++ ) { %>
                     <tr>
@@ -66,7 +67,7 @@
                             <a href="/<%= data[i].PINYIN %>"><%= data[i].SECURITY_NAME_ABBR %> </a>
                             <span> (股市代码: <%= data[i].SECURITY_CODE %>)</span>
                         </td>
-                        <td id='tb-date'><%= data[i].REPORT_DATE_NAME %></td> 
+                        <td id='tb-date'><%= data[i].REPORT_DATE_NAME %></td>
                     </tr>
                     <% } %>
 				</table>
