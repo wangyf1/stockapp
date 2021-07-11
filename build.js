@@ -81,17 +81,6 @@ function getData(code) {
     let parsedData = new Map()
     let dates = new Set()
     let companyName = ""
-    const cursor = db.query(client, "niubi", "companies", [
-      { $match: { SECURITY_CODE: code } },
-      {
-        $group: {
-          _id: "$SECURITY_CODE",
-          BASIC_INFO: { $first: "$BASIC_INFO" },
-        }
-      }
-    ])
-    const res = await cursor.next()
-    const companyInfo = res["BASIC_INFO"]
     try {
       for (const [_, e] of collections.entries()) {
         const dbname = e[0]
@@ -147,7 +136,6 @@ function getData(code) {
         "data": parsedData,
         "cname": companyName,
         "dates": JSON.stringify(dates),
-        "cinfo": companyInfo,
       }
     }
   }
@@ -171,6 +159,7 @@ function getData(code) {
         heteronym: false
       }).flat().join("") + String(c["code"].replace(".", "")).padStart(6, "0")
       const graphData = await getData(c["code"])
+      graphData["cinfo"] = c["info"]
       let customJS
       try {
         customJS = fs.readFileSync(`${__dirname}/js/${py}.js`, "utf8")
