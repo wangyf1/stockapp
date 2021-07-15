@@ -14,4 +14,4 @@ jobs:
         with:
           node-version: 15.x
       - run: npm ci
-      - run: node init_db.js
+      - run: npm run updatedb all
