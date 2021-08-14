@@ -53,23 +53,40 @@
 			<div id='table-of-content'>
 				<table id="myTable">
 					<tr>
-						<th id='tb-col-1' onclick="sortTable(0)" onMouseOver="this.style.cursor='pointer'">
+						<th id='tb-col-1 index-tb-col' onclick="sortTable(0)" onMouseOver="this.style.cursor='pointer'">
 							<div class="responsive">现有财报数据公司 （持续更新中）</div>
 						</th>
 						<th class="responsive" onclick="sortTable(1)" onMouseOver="this.style.cursor='pointer'">
 							<div class="responsive">最近更新财报</div>
 						</th>
+						<th 
+						id='index-tb-col'
+						class="responsive"
+						onclick="sortTable(2)"
+						onMouseOver="this.style.cursor='pointer'">
+							<div class="responsive">营收</div>
+						</th>
+						<th
+						id='index-tb-col'
+						class="responsive"
+						onclick="sortTable(3)"
+						onMouseOver="this.style.cursor='pointer'">
+							<div class="responsive">毛利</div>
+						</th>
+
+					<% Object.keys(data).forEach((security_code) => { %>
+						<tr>
+							<td>
+								<a href="/<%= data[security_code]['PINYIN'] %>"><%= data[security_code]['SECURITY_NAME_ABBR'] %> </a>
+								<span> (股市代码: <%= security_code %>)</span>
+							</td>
+							<td id='index-tb-col'><%= data[security_code]['REPORT_DATE_NAME'] %></td>
+							<td id='index-tb-col'><%= data[security_code]['data']['income'] %></td>
+							<td id='index-tb-col'><%= data[security_code]['data']['profit'] %></td>
+						</tr>
+					<%});%>
 						
 					</tr>
-					<% for( let i = 0; i < data.length; i++ ) { %>
-                    <tr>
-                        <td>
-                            <a href="/<%= data[i].PINYIN %>"><%= data[i].SECURITY_NAME_ABBR %> </a>
-                            <span> (股市代码: <%= data[i].SECURITY_CODE %>)</span>
-                        </td>
-                        <td id='tb-date'><%= data[i].REPORT_DATE_NAME %></td>
-                    </tr>
-                    <% } %>
 				</table>
 			</div>
 

@@ -3,7 +3,8 @@ const path = require("path");
 const ejs = require("ejs");
 const yaml = require("js-yaml")
 const pinyin = require("pinyin")
-const db = require("./apis/database")
+const db = require("./apis/database");
+const { index } = require("./apis/database");
 
 const client = db.getClient()
 const collections = [
@@ -49,7 +50,7 @@ function getIndex() {
           SECURITY_CODE: { $max: "$SECURITY_CODE" },
         }
       }])
-      const companies = new Array()
+      const companies = new Map()
       while (await cursor.hasNext()) {
         const nxt = await cursor.next()
         nxt["PINYIN"] = pinyin(
@@ -63,7 +64,7 @@ function getIndex() {
         ])
         const ccres = await ccursor.next()
         nxt["REPORT_DATE_NAME"] = ccres["REPORT_DATE_NAME"]
-        companies.push(nxt)
+        companies[nxt["SECURITY_CODE"]] = nxt
       }
       return { "data": companies }
     } catch (e) {
@@ -146,12 +147,6 @@ function getData(code) {
   try {
     await client.connect()
     const indexData = await getIndex()
-    console.log("Rendering index file")
-    ejs2html({
-      path: `${__dirname}/views/index.ejs`,
-      outPath: `${__dirname}/public/index.html`,
-      data: indexData,
-    })
 
     for (const [_, c] of Object.entries(companies)) {
       const py = pinyin(c["name"], {
@@ -173,7 +168,29 @@ function getData(code) {
         outPath: `${__dirname}/public/${py}.html`,
         data: graphData,
       })
+      
+      c.code = c.code.toString().padStart(6, "0")
+      if (!(c.code in indexData.data)) {
+        console.log(c.code, c.name, "not in index")
+        continue
+      }
+      function peep(arr) {
+        if (!arr) return "N/A";
+        return arr[arr.length - 1]
+      }
+      const src = graphData.data
+      indexData["data"][c.code]["data"] = {
+        income: peep(src["营业总收入"] || peep(src["营业收入"])),
+        profit: peep(src["毛利"]),
+      }
     }
+
+    console.log("Rendering index file")
+    ejs2html({
+      path: `${__dirname}/views/index.ejs`,
+      outPath: `${__dirname}/public/index.html`,
+      data: indexData,
+    })
   } catch (e) {
     console.log(e)
   } finally {

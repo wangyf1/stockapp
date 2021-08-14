@@ -358,8 +358,9 @@ canvas {
   font-size: larger;
 }
 
-#tb-date{
+#index-tb-col{
   text-align: center;
+  padding-left: 30px;
 }
 
 #table-of-content span {
