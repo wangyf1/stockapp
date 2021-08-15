@@ -31,7 +31,8 @@ var myChart = new Chart(ctx, {
             display: true,
             text: '年营业收入（按不同产品划分）（亿元）'
         },
-        responsive: false,
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
             xAxes: [{
                 stacked: true
