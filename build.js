@@ -1,10 +1,9 @@
 const fs = require("fs");
-const path = require("path");
 const ejs = require("ejs");
 const yaml = require("js-yaml")
 const pinyin = require("pinyin")
 const db = require("./apis/database");
-const { index } = require("./apis/database");
+const price = require("./apis/getDailyStockPrice");
 
 const client = db.getClient()
 const collections = [
@@ -174,6 +173,7 @@ function getData(code) {
         console.log(c.code, c.name, "not in index")
         continue
       }
+      const stockPrice = await price.getDailyStock(c["code"].toString())
       function peep(arr) {
         if (!arr) return "N/A";
         return arr[arr.length - 1]
@@ -182,7 +182,9 @@ function getData(code) {
       indexData["data"][c.code]["data"] = {
         income: peep(src["营业总收入"] || peep(src["营业收入"])),
         profit: peep(src["毛利"]),
+        ...stockPrice,
       }
+      console.log(indexData.data[c.code].data)
     }
 
     console.log("Rendering index file")

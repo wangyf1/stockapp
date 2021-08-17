@@ -73,6 +73,20 @@
 						onMouseOver="this.style.cursor='pointer'">
 							<div class="responsive">毛利</div>
 						</th>
+						<th
+						id='index-tb-col'
+						class="responsive"
+						onclick="sortTable(4)"
+						onMouseOver="this.style.cursor='pointer'">
+							<div class="responsive">股价</div>
+						</th>
+						<th
+						id='index-tb-col'
+						class="responsive"
+						onclick="sortTable(5)"
+						onMouseOver="this.style.cursor='pointer'">
+							<div class="responsive">股价变动</div>
+						</th>
 
 					<% Object.keys(data).forEach((security_code) => { %>
 						<tr>
@@ -83,6 +97,13 @@
 							<td id='index-tb-col'><%= data[security_code]['REPORT_DATE_NAME'] %></td>
 							<td id='index-tb-col'><%= data[security_code]['data']['income'] %></td>
 							<td id='index-tb-col'><%= data[security_code]['data']['profit'] %></td>
+							<% const color = data[security_code]['data']['percentChanged'] >= 0 ? "red" : "green" %>
+							<td id='index-tb-col'
+							style='color:<%=color%>'
+							><%= data[security_code]['data']['price'] %></td>
+							<td id='index-tb-col'
+							style='color:<%=color%>'
+							><%= data[security_code]['data']['percentChanged'] %>%</td>
 						</tr>
 					<%});%>
 						
