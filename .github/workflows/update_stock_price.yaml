@@ -2,7 +2,7 @@ name: Scheduled update
 
 on:
   schedule:
-    - cron: '0 24,6 * * *'  # 6 am every day
+    - cron: '0 23,6 * * *'  # 6 am every day
 
 jobs:
   build:
