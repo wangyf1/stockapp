@@ -1,8 +1,8 @@
-name: Scheduled update on earning reports on next day
+name: Quarterly update on earning reports
 
 on:
   schedule:
-    - cron: '0 0 1 1,4,7,10 *'  # run on the day after reports are available
+    - cron: '0 6 1 * *'  # 6:00 first day of each month
 
 jobs:
   build:
@@ -13,5 +13,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 15.x
-      - run: npm ci
-      - run: npm run updatedb all
+      - run: npm ci & npm run updatedb all && npm run build
+
+      - name: publish to netlify site
+        uses: netlify/actions/cli@master
+        with:
+          args: deploy --dir=public --prod
+        env:
+          NETLIFY_SITE_ID: 7591e6db-1195-474a-a41b-e6edfac69f2a
+          NETLIFY_AUTH_TOKEN: x2q6en5jXIvrQpvyNgBNr_XWPvZYdm7Yls6GNQvRVSo
+

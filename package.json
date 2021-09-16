@@ -19,6 +19,7 @@
         "html-to-react": "^1.4.5",
         "http-server": "*",
         "js-yaml": "^4.1.0",
+        "moment": "^2.29.1",
         "mongoose": "^5.11.18",
         "node-pre-gyp": "^0.17.0",
         "nodemon": "^2.0.7",

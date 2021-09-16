@@ -173,7 +173,23 @@ function getData(code) {
         console.log(c.code, c.name, "not in index")
         continue
       }
-      const stockPrice = await price.getDailyStock(c["code"].toString())
+      const stockPrice = {price: "N/A", percentChanged: "N/A"}
+      const cursor = db.query(client, "niubi", "stock_prices", [
+        { $match: { SECURITY_CODE: c.code } },
+        {
+          $group: {
+            _id: "$SECURITY_CODE",
+            DATETIME: {$max: "$DATETIME"},
+            STOCK_PRICE: {$first: "$STOCK_PRICE"},
+            PERCENT_CHANGED: {$first: "$PERCENT_CHANGED"},
+          }
+        },
+      ])
+      while (await cursor.hasNext()) {
+        const nxt = await cursor.next()
+        stockPrice.price = nxt.STOCK_PRICE
+        stockPrice.percentChanged = nxt.PERCENT_CHANGED
+      }
       function peep(arr) {
         if (!arr) return "N/A";
         return arr[arr.length - 1]

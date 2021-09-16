@@ -1,9 +1,11 @@
 const fs = require("fs")
 const yaml = require("js-yaml")
 const { argv } = require("process")
+const moment = require("moment")
 const datacenter = require("./apis/datacenter")
 const f10 = require("./apis/f10")
 const db = require("./apis/database")
+const tickers = require("./apis/getDailyStockPrice")
 
 const configPath = "./config/companies.yaml"
 
@@ -101,14 +103,38 @@ async function updateCompanies(client, companies, dbName = "niubi") {
 }
 
 
+async function updateStockPrice(client, companies, dbName = "niubi") {
+  // if the update failed, the data will be saved as 'N/A'
+  // this is to ensure we don't display any stale data
+  const utcNow = moment.utc().format('YYYY-MM-DD hh:mm:00')
+  await db.index(client, dbName, "stock_prices", { SECURITY_CODE: 1, DATETIME: -1 }, true)
+  for (const [_, company] of Object.entries(companies)) {
+    const securityCode = company.code.toString().padStart(6, "0")
+    const stockPrice = await tickers.getDailyStock(securityCode.toString())
+    const entry = {
+      "SECURITY_NAME_ABBR": company.name,
+      "SECURITY_CODE": securityCode,
+      "STOCK_PRICE": stockPrice.price,
+      "PERCENT_CHANGED": stockPrice.percentChanged,
+      "DATETIME": utcNow,
+    }
+    await db.insert(client, dbName, "stock_prices", entry)
+    console.log(`Updated stock price for ${company.name}`)
+  }
+}
+
+
 async function main() {
   const helpMsg = `
   Make sure you've added the company details to the config/companies.yaml file first
 
-  Args: company name(s)
-  - To add a new company to the db, enter its name
-  - For multiple companies, separate by comma (,)
-  - To refresh all existing companies, enter 'all' instead
+  Options:
+  company name(s)   - Add a new company to the db
+                    - For multiple companies, separate companies by comma (,)
+
+  all               - To refresh earning report for all existing companies
+
+  stock_price       - Update today's stock proce for all companies
   `
 
   if (argv.slice(2).length != 1) {
@@ -129,12 +155,17 @@ async function main() {
     return newEntries
   }
 
+  let fn = updateCompanies
   if (arg == "-h" || arg == "help") {
     console.log(helpMsg)
     process.exit(0)
   } else if (arg == "all") {
     console.log("Refreshing data for all companies")
-  } else if (arg.split(",").length > 1 || arg.split("，").length > 1) {
+  } else if (arg == "stock_price") {
+    console.log("Updating stock price for all companies")
+    fn = updateStockPrice
+  }
+  else if (arg.split(",").length > 1 || arg.split("，").length > 1) {
     let names = arg.split(",")
     if (names.length == 1) {
       names = arg.split("，")
@@ -148,7 +179,7 @@ async function main() {
   const client = db.getClient()
   try {
     await client.connect()
-    await run(updateCompanies, [client, companies])
+    await run(fn, [client, companies])
   } finally {
     await client.close()
   }

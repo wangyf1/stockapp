@@ -1,14 +1,14 @@
-const https = require("https")
+const http = require("http")
 const re = /jQuery[0-9]+_[0-9]+\((.*)\)\;/
 
 async function getDailyStock(secid) {
   let prefixNum = 0
   let tmp = []
-  let req = "https://push2.eastmoney.com/api/qt/stock/get?"
+  let req = "http://push2.eastmoney.com/api/qt/stock/get?"
   async function run(req) {
     return new Promise((resolve) => {
       console.log("GET: ", req)
-      https.get(req, {
+      http.get(req, {
         headers: {
           "sec-ch-ua": '"Chromium";v="92", " Not A;Brand";v="99", "Google Chrome";v="92"',
           "DNT": "1",
@@ -49,7 +49,7 @@ async function getDailyStock(secid) {
     await new Promise(resolve => setTimeout(resolve, 3000)) // try to avoid connection error
     prefixNum ++
   }
-  return {"price": "N/A", "priceChanged": "N/A"}
+  return {"price": "N/A", "percentChanged": "N/A"}
 }
 
 
